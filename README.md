@@ -1,4 +1,4 @@
-# Member Management Service
+# API Gateway
 [![CircleCI](https://circleci.com/gh/Zeus-2-0/api-gateway/tree/master.svg?style=svg)](https://circleci.com/gh/Zeus-2-0/api-gateway/tree/master)
 
 ## Service Highlights
