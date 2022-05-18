@@ -1,2 +1,12 @@
+zeus-api-gateway:
+  api:
+    version: 1.0.0
 server:
   port: 8088
+spring:
+  profiles:
+    active: local, clean
+  security:
+    user:
+      name: user
+      password: user
