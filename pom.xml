@@ -172,7 +172,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <apiDocsUrl>http://localhost:8086/v3/api-docs.yaml</apiDocsUrl>
+                    <apiDocsUrl>http://localhost:8088/v3/api-docs.yaml</apiDocsUrl>
                     <outputFileName>api-gateway.yaml</outputFileName>
                     <outputDir>openapi-spec</outputDir>
                     <skip>false</skip>
