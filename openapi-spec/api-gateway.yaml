@@ -1,0 +1,53 @@
+openapi: 3.0.1
+info:
+  title: Zeus API Gateway
+  contact:
+    name: Balaji Varadharajan
+    url: http://www.zeus.com
+    email: vbalaji215@outlook.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/License-2.0.html
+  version: 1.0.0
+servers:
+- url: http://localhost:8088
+  description: Development Server
+paths:
+  /api/v1/zeus:
+    get:
+      tags:
+      - welcome-api-impl
+      operationId: welcome
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WelcomeDto'
+  /api/v1/zeus/{username}:
+    get:
+      tags:
+      - welcome
+      description: Get a Welcome Message for the user
+      operationId: welcomeUser
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved ta welcome message for the member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WelcomeDto'
+components:
+  schemas:
+    WelcomeDto:
+      type: object
+      properties:
+        username:
+          type: string
