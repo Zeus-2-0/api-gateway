@@ -1,4 +1,11 @@
-package com.brihaspathee.zeus.permissions;/**
+package com.brihaspathee.zeus.permissions;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+/**
  * Created in Intellij IDEA
  * User: Balaji Varadharajan
  * Date: 23, May 2022
@@ -6,5 +13,8 @@ package com.brihaspathee.zeus.permissions;/**
  * Project: Zeus
  * Package Name: com.brihaspathee.zeus.permissions
  * To change this template use File | Settings | File and Code Template
- */public @interface TransactionUpdatePermission {
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@PreAuthorize("hasAnyAuthority('transaction.update')")
+public @interface TransactionUpdatePermission {
 }

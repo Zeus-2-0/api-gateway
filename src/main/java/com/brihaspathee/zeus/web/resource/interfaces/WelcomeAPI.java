@@ -52,6 +52,26 @@ public interface WelcomeAPI {
     @GetMapping("/{username}")
     WelcomeDto welcomeUser(@PathVariable String username);
 
-    @GetMapping
+    /**
+     * Get the account related to the account id that is passed in as input
+     * @return static welcome message
+     */
+    @Operation(
+            method = "GET",
+            description = "Get a generic Welcome",
+            tags = {"welcome"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved a generic welcome message",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = WelcomeDto.class))
+                            }
+                    )
+            }
+    )
+    @GetMapping("/welcome")
     WelcomeDto welcome();
 }

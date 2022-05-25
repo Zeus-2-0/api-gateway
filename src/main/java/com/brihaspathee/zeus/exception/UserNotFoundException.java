@@ -1,4 +1,6 @@
-package com.brihaspathee.zeus.exception;/**
+package com.brihaspathee.zeus.exception;
+
+/**
  * Created in Intellij IDEA
  * User: Balaji Varadharajan
  * Date: 23, May 2022
@@ -6,5 +8,14 @@ package com.brihaspathee.zeus.exception;/**
  * Project: Zeus
  * Package Name: com.brihaspathee.zeus.exception
  * To change this template use File | Settings | File and Code Template
- */public class UserNotFoundException {
+ */
+public class UserNotFoundException extends RuntimeException{
+
+    public UserNotFoundException(String message){
+        super(message);
+    }
+
+    public UserNotFoundException(String message, Throwable cause){
+        super(message, cause);
+    }
 }
