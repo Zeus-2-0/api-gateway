@@ -1,4 +1,8 @@
-package com.brihaspathee.zeus.web.model;/**
+package com.brihaspathee.zeus.web.model;
+
+import lombok.*;
+
+/**
  * Created in Intellij IDEA
  * User: Balaji Varadharajan
  * Date: 25, May 2022
@@ -6,5 +10,23 @@ package com.brihaspathee.zeus.web.model;/**
  * Project: Zeus
  * Package Name: com.brihaspathee.zeus.web.model
  * To change this template use File | Settings | File and Code Template
- */public class AuthenticationRequest {
+ */
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class AuthenticationRequest {
+
+    private String username;
+
+    private String password;
+
+    @Override
+    public String toString() {
+        return "AuthenticateRequest{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

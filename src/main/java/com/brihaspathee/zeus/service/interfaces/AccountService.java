@@ -1,4 +1,13 @@
-package com.brihaspathee.zeus.service.interfaces;/**
+package com.brihaspathee.zeus.service.interfaces;
+
+import com.brihaspathee.zeus.web.model.AccountDto;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
  * Created in Intellij IDEA
  * User: Balaji Varadharajan
  * Date: 20, May 2022
@@ -6,5 +15,8 @@ package com.brihaspathee.zeus.service.interfaces;/**
  * Project: Zeus
  * Package Name: com.brihaspathee.zeus.service.interfaces
  * To change this template use File | Settings | File and Code Template
- */public interface AccountService {
+ */
+public interface AccountService {
+
+    List<AccountDto> getAllAccounts();
 }
