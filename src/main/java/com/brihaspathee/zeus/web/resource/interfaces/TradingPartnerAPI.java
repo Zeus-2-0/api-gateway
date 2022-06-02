@@ -1,0 +1,91 @@
+package com.brihaspathee.zeus.web.resource.interfaces;
+
+import com.brihaspathee.zeus.permissions.AccountReadPermission;
+import com.brihaspathee.zeus.permissions.TradingPartnerReadPermission;
+import com.brihaspathee.zeus.web.model.AccountDto;
+import com.brihaspathee.zeus.web.model.TradingPartnerDto;
+import com.brihaspathee.zeus.web.model.TradingPartnerList;
+import com.brihaspathee.zeus.web.response.ZeusApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+/**
+ * Created in Intellij IDEA
+ * User: Balaji Varadharajan
+ * Date: 02, June 2022
+ * Time: 11:41 AM
+ * Project: Zeus
+ * Package Name: com.brihaspathee.zeus.web.resource.interfaces
+ * To change this template use File | Settings | File and Code Template
+ */
+@RequestMapping("/api/v1/zeus/tp")
+@CrossOrigin(origins = "http://localhost:7200")
+@Validated
+public interface TradingPartnerAPI {
+
+    /**
+     * Get the all trading partners in the system
+     * @return Trading Partner List
+     */
+    @Operation(
+            method = "GET",
+            description = "Get all the trading partners",
+            tags = {"trading-partner"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved all the trading partners",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = TradingPartnerList.class))
+                            }
+                    )
+            }
+    )
+    @GetMapping
+    @TradingPartnerReadPermission
+    TradingPartnerList getAllTradingPartners();
+
+    /**
+     * Get a trading partner details by trading partner id
+     * @param tradingPartnerId
+     * @return
+     */
+    @Operation(
+            method = "GET",
+            description = "Get the trading partner by trading partner id",
+            tags = {"trading-partner"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved the trading partner",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = TradingPartnerDto.class))
+                            }
+                    ),
+                    @ApiResponse(responseCode = "404",
+                            description = "Not Found",
+                            content = {
+                                    @Content(mediaType = "application/json",schema = @Schema(implementation = TradingPartnerDto.class))
+                            }),
+            }
+    )
+    @TradingPartnerReadPermission
+    @GetMapping("/{tradingPartnerId}")
+    TradingPartnerDto getTradingPartnerById(@PathVariable("tradingPartnerId") String tradingPartnerId);
+}
