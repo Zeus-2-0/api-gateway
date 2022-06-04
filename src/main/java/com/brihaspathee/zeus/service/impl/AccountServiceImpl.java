@@ -2,12 +2,14 @@ package com.brihaspathee.zeus.service.impl;
 
 import com.brihaspathee.zeus.service.interfaces.AccountService;
 import com.brihaspathee.zeus.web.model.AccountDto;
+import com.brihaspathee.zeus.web.model.AccountList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created in Intellij IDEA
@@ -85,5 +87,26 @@ public class AccountServiceImpl implements AccountService {
                         .build()
         );
         return accounts;
+    }
+
+    @Override
+    public AccountList getAccountsByParams(Map<String, String> searchParams) {
+        List<AccountDto> accounts = Arrays.asList(
+                AccountDto.builder()
+                        .accountId("BE423SDFT24")
+                        .lineOfBusiness("HIX")
+                        .marketplaceType("FFM")
+                        .state("FL")
+                        .issuerSubscriberId("Z142345234")
+                        .build(),
+                AccountDto.builder()
+                        .accountId("BE423SDFT25")
+                        .lineOfBusiness("HIX")
+                        .marketplaceType("FFM")
+                        .state("GA")
+                        .issuerSubscriberId("Z142345235")
+                        .build());
+        AccountList accountList = AccountList.builder().accountDtos(accounts).build();
+        return accountList;
     }
 }
