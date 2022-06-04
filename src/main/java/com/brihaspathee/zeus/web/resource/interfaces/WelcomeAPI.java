@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,5 +74,5 @@ public interface WelcomeAPI {
             }
     )
     @GetMapping("/welcome")
-    WelcomeDto welcome();
+    ResponseEntity<ZeusApiResponse<WelcomeDto>> welcome();
 }

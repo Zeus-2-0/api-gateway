@@ -1,11 +1,13 @@
 package com.brihaspathee.zeus.service.interfaces;
 
 import com.brihaspathee.zeus.web.model.AccountDto;
+import com.brihaspathee.zeus.web.model.AccountList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created in Intellij IDEA
@@ -19,4 +21,5 @@ import java.util.List;
 public interface AccountService {
 
     List<AccountDto> getAllAccounts();
+    AccountList getAccountsByParams(Map<String, String> searchParams);
 }
