@@ -11,7 +11,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -42,9 +45,14 @@ public class APIGatewayUserServiceImpl implements APIGatewayUserService {
     @Override
     public AuthenticationResponse getAuthenticationResponse(User user) {
         final String jwt = zeusJwtUtil.generateToken(user);
+        Date expirationDate = zeusJwtUtil.extractExpiration(jwt);
+        LocalDateTime expirationTime = expirationDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         return AuthenticationResponse.builder()
-                .jwtToken(jwt)
+                .authToken(jwt)
+                .authExpiration(expirationTime)
                 .userDto(getUserDto(user))
+                .isAuthenticated(true)
+                .authMessage("Authentication Successful")
                 .build();
     }
 

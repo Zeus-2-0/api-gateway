@@ -31,7 +31,7 @@ import java.util.Map;
  * To change this template use File | Settings | File and Code Template
  */
 @RequestMapping("/api/v1/zeus/account")
-@CrossOrigin(origins = "http://localhost:7200")
+//@CrossOrigin(origins = "http://localhost:7200")
 @Validated
 public interface AccountAPI {
 

@@ -1,6 +1,8 @@
 package com.brihaspathee.zeus.service.interfaces;
 
+import com.brihaspathee.zeus.web.model.InternalListTypesDto;
 import com.brihaspathee.zeus.web.model.InternalRefDataList;
+import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 
 /**
  * Created in Intellij IDEA
@@ -13,5 +15,16 @@ import com.brihaspathee.zeus.web.model.InternalRefDataList;
  */
 public interface ReferenceDataService {
 
+    /**
+     * Get all the internal list codes that are associated with the list type
+     * @param listTypeName
+     * @return
+     */
     InternalRefDataList getInternalRefData(String listTypeName);
+
+    /**
+     * Get all the list types that are present in the system
+     * @return
+     */
+    ZeusApiResponse<InternalListTypesDto> getAllInternalListTypes();
 }

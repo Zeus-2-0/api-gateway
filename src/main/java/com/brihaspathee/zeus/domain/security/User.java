@@ -67,7 +67,7 @@ public class User implements UserDetails, CredentialsContainer {
     private boolean enabled = true;
 
     @Singular
-    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(name = "USER_ROLE",
             joinColumns = {@JoinColumn(name = "USER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID")})
@@ -127,6 +127,7 @@ public class User implements UserDetails, CredentialsContainer {
         return this.enabled;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
@@ -137,6 +138,9 @@ public class User implements UserDetails, CredentialsContainer {
                 ", accountNotLocked=" + accountNotLocked +
                 ", credentialsNotExpired=" + credentialsNotExpired +
                 ", enabled=" + enabled +
+                ", roles=" + roles +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
                 '}';
     }
 

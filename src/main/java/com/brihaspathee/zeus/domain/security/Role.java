@@ -44,7 +44,7 @@ public class Role {
     private Set<User> users;
 
     @Singular
-    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ROLE_AUTHORITY",
             joinColumns = {@JoinColumn(name = "ROLE_ID")},
             inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID")})
@@ -63,6 +63,9 @@ public class Role {
         return "Role{" +
                 "roleId=" + roleId +
                 ", roleName='" + roleName + '\'' +
+                ", authorities=" + authorities +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
                 '}';
     }
 

@@ -35,6 +35,7 @@ INSERT INTO AUTHORITY(authority_id, permission, created_date, updated_date) VALU
 INSERT INTO ROLE(role_id, role_name, created_date, updated_date) VALUES ('100ad35e-04ee-4da5-952c-e840b7a8d1ea', 'ADMIN', sysdate(), sysdate());
 INSERT INTO ROLE(role_id, role_name, created_date, updated_date) VALUES ('0bbf5895-9084-4b8d-860c-c722d649ff66', 'ENROLLMENT_SPECIALIST', sysdate(), sysdate());
 INSERT INTO ROLE(role_id, role_name, created_date, updated_date) VALUES ('fbf390fc-99b7-40ad-b368-20523dda8e12', 'ENROLLMENT_MANAGER', sysdate(), sysdate());
+INSERT INTO ROLE(role_id, role_name, created_date, updated_date) VALUES ('9449e581-719d-41cf-abac-56a029d4dc97', 'SERVICE', sysdate(), sysdate());
 
 -- Role Authority Relationship
 
@@ -97,14 +98,35 @@ INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('0bbf5895-9084-4b8d-86
 INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('0bbf5895-9084-4b8d-860c-c722d649ff66', '78ff18a5-4411-4f09-91ca-f16469fdf075');
 INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('0bbf5895-9084-4b8d-860c-c722d649ff66', 'c8ae9d23-6e40-4604-acd5-7b350feeebd0');
 
+-- Service Role
+-- Account entity
+
+INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('9449e581-719d-41cf-abac-56a029d4dc97', 'b995d822-03ba-46a1-a6cf-1d75dd51e57b');
+INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('9449e581-719d-41cf-abac-56a029d4dc97', '21c69c34-3939-41af-9797-33962a701f00');
+INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('9449e581-719d-41cf-abac-56a029d4dc97', '2bb12b6c-e399-4b54-85a4-383048399ce2');
+INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('9449e581-719d-41cf-abac-56a029d4dc97', 'e7ad0679-aace-4def-8898-26cd30147128');
+
+-- Transaction entity
+
+INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('9449e581-719d-41cf-abac-56a029d4dc97', '62743bb2-c6c8-4194-ae68-cfb2d2414fc6');
+INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('9449e581-719d-41cf-abac-56a029d4dc97', '78ff18a5-4411-4f09-91ca-f16469fdf075');
+INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('9449e581-719d-41cf-abac-56a029d4dc97', 'c8ae9d23-6e40-4604-acd5-7b350feeebd0');
+INSERT INTO ROLE_AUTHORITY(role_id, authority_id) VALUES ('9449e581-719d-41cf-abac-56a029d4dc97', '965386ba-7f77-4cf1-8a70-b5b5fd58f4d6');
+
 -- Users
 
 INSERT INTO SECURITY_USER(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled, created_date, updated_date) VALUES ('3375d2ab-5b0f-4da2-a26b-abf7354086f4', 'john', '{bcrypt}$2a$10$RILDxbGK4jPwVu4LLtAzJ.inZyTZIIif0L8JdFAZo7BscxhtQCEgu', true, true, true, true, sysdate(), sysdate());
 INSERT INTO SECURITY_USER(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled, created_date, updated_date) VALUES ('ac5f043b-67b0-4878-8819-5d47ed8dad29', 'mary', '{bcrypt}$2a$10$A//IPwppA4uxB9ElZk/R.OqSy9xs5RPwBWCyTjtiqVcUlPv/2e6E6', true, true, true, true, sysdate(), sysdate());
 INSERT INTO SECURITY_USER(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled,created_date, updated_date) VALUES ('cabcab65-a744-4e09-a727-ba686d20127c', 'cindy', '{bcrypt}$2a$10$JhPtDZiWLU.G3YX.oAhz2uXB0PYBhzlJ7q6QTf2a1ZhU83SheFtq.', true, true, true, true, sysdate(), sysdate());
+INSERT INTO SECURITY_USER(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled,created_date, updated_date) VALUES ('94b479d0-170e-4413-8095-5e0a359987c0', 'member-mgmt-service', '{bcrypt}$2a$10$NvzD7ZVafMdi4O3R0et1Z.V5PIIHbsUlnIKTpsI6hDkpSr5.98skC', true, true, true, true, sysdate(), sysdate());
+INSERT INTO SECURITY_USER(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled,created_date, updated_date) VALUES ('4dee2ac2-fba7-42d1-bf60-ce19f3a23c6f', 'tp-service', '{bcrypt}$2a$10$Rq3ZWjWMGiv2l9E6juvX7OmmezKZP9KbT5/hsurfRC/y9TYGn15C.', true, true, true, true, sysdate(), sysdate());
+INSERT INTO SECURITY_USER(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled,created_date, updated_date) VALUES ('40e2c94d-cc8c-4201-bba5-7df3f6a06235', 'trans-mgmt-service', '{bcrypt}$2a$10$9/A.KaaKBZC.opePUlrAy.fxw/TLIgdbIMBazzDQRn2Ldotf.9Fum', true, true, true, true, sysdate(), sysdate());
 
 -- User Role Relationship
 
 INSERT INTO USER_ROLE(user_id, role_id) VALUES ('3375d2ab-5b0f-4da2-a26b-abf7354086f4', '100ad35e-04ee-4da5-952c-e840b7a8d1ea');
 INSERT INTO USER_ROLE(user_id, role_id) VALUES ('ac5f043b-67b0-4878-8819-5d47ed8dad29', '0bbf5895-9084-4b8d-860c-c722d649ff66');
 INSERT INTO USER_ROLE(user_id, role_id) VALUES ('cabcab65-a744-4e09-a727-ba686d20127c', 'fbf390fc-99b7-40ad-b368-20523dda8e12');
+INSERT INTO USER_ROLE(user_id, role_id) VALUES ('94b479d0-170e-4413-8095-5e0a359987c0', '9449e581-719d-41cf-abac-56a029d4dc97');
+INSERT INTO USER_ROLE(user_id, role_id) VALUES ('4dee2ac2-fba7-42d1-bf60-ce19f3a23c6f', '9449e581-719d-41cf-abac-56a029d4dc97');
+INSERT INTO USER_ROLE(user_id, role_id) VALUES ('40e2c94d-cc8c-4201-bba5-7df3f6a06235', '9449e581-719d-41cf-abac-56a029d4dc97');

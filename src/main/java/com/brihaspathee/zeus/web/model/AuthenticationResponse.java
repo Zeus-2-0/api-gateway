@@ -1,9 +1,9 @@
 package com.brihaspathee.zeus.web.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created in Intellij IDEA
@@ -17,17 +17,27 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class AuthenticationResponse {
 
-    private final String jwtToken;
+    private boolean isAuthenticated;
 
-    private final UserDto userDto;
+    private String authMessage;
+
+    private String authToken;
+
+    private LocalDateTime authExpiration;
+
+    private UserDto userDto;
 
     @Override
     public String toString() {
         return "AuthenticationResponse{" +
-                "jwtToken='" + jwtToken + '\'' +
+                "isAuthenticated=" + isAuthenticated +
+                ", authMessage='" + authMessage + '\'' +
+                ", authToken='" + authToken + '\'' +
+                ", authExpiration=" + authExpiration +
                 ", userDto=" + userDto +
                 '}';
     }
