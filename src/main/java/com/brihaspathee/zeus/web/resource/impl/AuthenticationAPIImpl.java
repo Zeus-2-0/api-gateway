@@ -8,13 +8,17 @@ import com.brihaspathee.zeus.web.model.AuthenticationDto;
 import com.brihaspathee.zeus.web.model.AuthenticationRequest;
 import com.brihaspathee.zeus.web.model.AuthenticationResponse;
 import com.brihaspathee.zeus.web.resource.interfaces.AuthenticationAPI;
+import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
 
 /**
  * Created in Intellij IDEA
@@ -34,8 +38,14 @@ public class AuthenticationAPIImpl implements AuthenticationAPI {
     private final APIGatewayUserService apiGatewayUserService;
 
 
+    /**
+     * Authenticates the username and password that is passed in the authentication request
+     * The authentication request is passed in the body of the request
+     * @param authenticationRequest
+     * @return
+     */
     @Override
-    public AuthenticationResponse jwtAuthentication(AuthenticationRequest authenticationRequest) throws Exception {
+    public ResponseEntity<ZeusApiResponse<AuthenticationResponse>> jwtAuthentication(AuthenticationRequest authenticationRequest) throws Exception {
         try{
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
@@ -47,13 +57,37 @@ public class AuthenticationAPIImpl implements AuthenticationAPI {
 //        final User userDetails = zeusUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 //        final String jwt = zeusJwtUtil.generateToken(userDetails);
 //        return AuthenticationResponse.builder().jwtToken(jwt).build();
-        return apiGatewayUserService.getAuthenticationResponse(authenticationRequest.getUsername());
+        AuthenticationResponse authenticationResponse = apiGatewayUserService.getAuthenticationResponse(authenticationRequest.getUsername());
+        return getAuthenticatedResponse(authenticationResponse);
     }
 
+    /**
+     * Authenticates the username and password
+     * @param user
+     * @return
+     */
     @Override
-    public AuthenticationResponse basicAuthentication(User user) throws Exception {
+    public ResponseEntity<ZeusApiResponse<AuthenticationResponse>> basicAuthentication(User user) throws Exception {
 //        final String jwt = zeusJwtUtil.generateToken(user);
 //        return AuthenticationResponse.builder().jwtToken(jwt).build();
-        return apiGatewayUserService.getAuthenticationResponse(user);
+        AuthenticationResponse authenticationResponse = apiGatewayUserService.getAuthenticationResponse(user);
+        return getAuthenticatedResponse(authenticationResponse);
     }
+
+    /**
+     * Creates the authentication response after successful authentication of the user
+     * @param authenticationResponse
+     * @return
+     */
+    private ResponseEntity<ZeusApiResponse<AuthenticationResponse>> getAuthenticatedResponse(AuthenticationResponse authenticationResponse){
+        ZeusApiResponse<AuthenticationResponse> apiResponse = ZeusApiResponse.<AuthenticationResponse>builder()
+                .timestamp(LocalDateTime.now())
+                .response(authenticationResponse)
+                .status(HttpStatus.OK)
+                .statusCode(200)
+                .message("Authenticated Successfully")
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
 }

@@ -56,7 +56,6 @@ public class Authority {
         return "Authority{" +
                 "authorityId=" + authorityId +
                 ", permission='" + permission + '\'' +
-                ", roles=" + roles +
                 '}';
     }
 

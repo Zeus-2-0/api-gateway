@@ -3,6 +3,7 @@ package com.brihaspathee.zeus.web.model;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created in Intellij IDEA
@@ -20,14 +21,26 @@ import java.util.List;
 @AllArgsConstructor
 public class RoleDto {
 
+    /**
+     * The unique role id that is associated with the role
+     */
+    private UUID roleId;
+
+    /**
+     * The role name of the role
+     */
     private String roleName;
 
+    /**
+     * The authorities that are associated with the role
+     */
     private List<AuthorityDto> authorityDtos;
 
     @Override
     public String toString() {
         return "RoleDto{" +
-                "roleName='" + roleName + '\'' +
+                "roleId='" + roleId + '\'' +
+                ", roleName='" + roleName + '\'' +
                 ", authorityDtos=" + authorityDtos +
                 '}';
     }

@@ -56,7 +56,16 @@
         <dependency>
             <groupId>com.brihaspathee.zeus</groupId>
             <artifactId>zeus-library</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <classifier>osx-aarch_64</classifier>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

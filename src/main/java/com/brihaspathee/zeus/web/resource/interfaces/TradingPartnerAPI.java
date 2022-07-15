@@ -14,12 +14,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created in Intellij IDEA
@@ -31,7 +29,7 @@ import java.util.List;
  * To change this template use File | Settings | File and Code Template
  */
 @RequestMapping("/api/v1/zeus/tp")
-@CrossOrigin(origins = "http://localhost:7200")
+//@CrossOrigin(origins = "http://localhost:7200")
 @Validated
 public interface TradingPartnerAPI {
 
@@ -57,7 +55,7 @@ public interface TradingPartnerAPI {
     )
     @GetMapping
     @TradingPartnerReadPermission
-    TradingPartnerList getAllTradingPartners();
+    ResponseEntity<ZeusApiResponse<TradingPartnerList>> getAllTradingPartners();
 
     /**
      * Get a trading partner details by trading partner id
@@ -87,5 +85,30 @@ public interface TradingPartnerAPI {
     )
     @TradingPartnerReadPermission
     @GetMapping("/{tradingPartnerId}")
-    TradingPartnerDto getTradingPartnerById(@PathVariable("tradingPartnerId") String tradingPartnerId);
+    ResponseEntity<ZeusApiResponse<TradingPartnerDto>> getTradingPartnerById(@PathVariable("tradingPartnerId") String tradingPartnerId);
+
+    /**
+     * Get all the trading partners that match the search parameters
+     * @param searchParams
+     * @return
+     */
+    @Operation(
+            method = "GET",
+            description = "Get all the trading partners",
+            tags = {"trading-partner"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved all the trading partners",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = TradingPartnerList.class))
+                            }
+                    )
+            }
+    )
+    @TradingPartnerReadPermission
+    @GetMapping("/search")
+    ResponseEntity<ZeusApiResponse<TradingPartnerList>> getTradingPartnerByParameter(@RequestParam Map<String, String> searchParams);
 }

@@ -2,13 +2,13 @@ package com.brihaspathee.zeus.web.model;
 
 import lombok.*;
 
-import java.util.UUID;
+import java.util.List;
 
 /**
  * Created in Intellij IDEA
  * User: Balaji Varadharajan
- * Date: 25, May 2022
- * Time: 5:37 PM
+ * Date: 07, July 2022
+ * Time: 12:20 PM
  * Project: Zeus
  * Package Name: com.brihaspathee.zeus.web.model
  * To change this template use File | Settings | File and Code Template
@@ -18,23 +18,17 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthorityDto {
+public class UserList {
 
     /**
-     * The unique id that is associated with the authority
+     * The list of users
      */
-    private UUID authorityId;
-
-    /**
-     * The permission string of the authority
-     */
-    private String permission;
+    private List<UserDto> userDtos;
 
     @Override
     public String toString() {
-        return "AuthorityDto{" +
-                "authorityId=" + authorityId +
-                ", permission='" + permission + '\'' +
+        return "UserList{" +
+                "userDtos=" + userDtos +
                 '}';
     }
 }

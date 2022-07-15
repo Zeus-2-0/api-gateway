@@ -3,6 +3,7 @@ package com.brihaspathee.zeus.web.model;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created in Intellij IDEA
@@ -20,16 +21,31 @@ import java.util.List;
 @AllArgsConstructor
 public class UserDto {
 
+    /**
+     * The unique user id that is associated with the user
+     */
+    private UUID userId;
+
+    /**
+     * The user name of the user
+     */
     private String username;
 
+    /**
+     * The password of the user
+     */
     private String password;
 
+    /**
+     * The roles that are associated with the user
+     */
     private List<RoleDto> roleDtos;
 
     @Override
     public String toString() {
         return "UserDto{" +
-                "username='" + username + '\'' +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", roleDtos=" + roleDtos +
                 '}';
