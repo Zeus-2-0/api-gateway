@@ -1,6 +1,9 @@
 package com.brihaspathee.zeus.web.resource.interfaces;
 
 import com.brihaspathee.zeus.exception.ApiExceptionList;
+import com.brihaspathee.zeus.permissions.RoleCreatePermission;
+import com.brihaspathee.zeus.permissions.RoleReadPermission;
+import com.brihaspathee.zeus.permissions.RoleUpdatePermission;
 import com.brihaspathee.zeus.web.model.RoleDto;
 import com.brihaspathee.zeus.web.model.RoleList;
 import com.brihaspathee.zeus.web.model.TradingPartnerDto;
@@ -52,6 +55,7 @@ public interface RoleAPI {
             }
     )
     @GetMapping
+    @RoleReadPermission
     ResponseEntity<ZeusApiResponse<RoleList>> getAllRoles();
 
     /**
@@ -81,6 +85,7 @@ public interface RoleAPI {
                     })
     })
     @PostMapping
+    @RoleCreatePermission
     ResponseEntity<ZeusApiResponse<RoleDto>> createRole(@RequestBody RoleDto roleDto);
 
     /**
@@ -110,5 +115,6 @@ public interface RoleAPI {
                     })
     })
     @PutMapping("/{roleId}")
+    @RoleUpdatePermission
     ResponseEntity<ZeusApiResponse<RoleDto>> updateRole(@PathVariable UUID roleId, @RequestBody RoleDto roleDto);
 }

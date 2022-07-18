@@ -1,16 +1,20 @@
 package com.brihaspathee.zeus.exception;
 
+import com.brihaspathee.zeus.constants.ApiResponseConstants;
 import com.brihaspathee.zeus.web.model.AuthenticationResponse;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created in Intellij IDEA
@@ -33,9 +37,25 @@ public class ApiErrorHandler {
      * @throws JsonProcessingException
      */
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ZeusApiResponse<AuthenticationResponse>> handleBadCredentialsException(BadCredentialsException exception) throws JsonProcessingException {
+    public ResponseEntity<ZeusApiResponse<ApiExceptionList>> handleBadCredentialsException(BadCredentialsException exception) throws JsonProcessingException {
         log.info("Inside bad credentials exception handler");
-        return invalidCredentials("Authentication Failed. Invalid Password");
+        List<ApiException> errors = new ArrayList<>();
+        ApiException apiException = ApiException.builder()
+                .exceptionCode("100001")
+                .exceptionMessage(exception.getMessage())
+                .build();
+        errors.add(apiException);
+        ApiExceptionList exceptionList = ApiExceptionList.builder().exceptions(errors).build();
+        ZeusApiResponse<ApiExceptionList> apiResponse = ZeusApiResponse.<ApiExceptionList>builder()
+                .timestamp(LocalDateTime.now())
+                .response(exceptionList)
+                .status(HttpStatus.UNAUTHORIZED)
+                .statusCode(401)
+                .reason(ApiResponseConstants.INVALID_PASSWORD)
+                .message(ApiResponseConstants.FAIL)
+                .developerMessage(ApiResponseConstants.FAILURE_REASON)
+                .build();
+        return new ResponseEntity<>(apiResponse,HttpStatus.UNAUTHORIZED);
     }
 
 
@@ -47,27 +67,54 @@ public class ApiErrorHandler {
      * @throws JsonProcessingException
      */
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ZeusApiResponse<AuthenticationResponse>> handleBadCredentialsException(UserNotFoundException exception) throws JsonProcessingException {
+    public ResponseEntity<ZeusApiResponse<ApiExceptionList>> handleBadCredentialsException(UserNotFoundException exception) throws JsonProcessingException {
         log.info("Inside User not found exception");
-        return invalidCredentials("Authentication Failed. User not found");
+        List<ApiException> errors = new ArrayList<>();
+        ApiException apiException = ApiException.builder()
+                .exceptionCode("100002")
+                .exceptionMessage(exception.getMessage())
+                .build();
+        errors.add(apiException);
+        ApiExceptionList exceptionList = ApiExceptionList.builder().exceptions(errors).build();
+        ZeusApiResponse<ApiExceptionList> apiResponse = ZeusApiResponse.<ApiExceptionList>builder()
+                .timestamp(LocalDateTime.now())
+                .response(exceptionList)
+                .status(HttpStatus.UNAUTHORIZED)
+                .statusCode(401)
+                .reason(ApiResponseConstants.INVALID_USERNAME)
+                .message(ApiResponseConstants.FAIL)
+                .developerMessage(ApiResponseConstants.FAILURE_REASON)
+                .build();
+        return new ResponseEntity<>(apiResponse,HttpStatus.UNAUTHORIZED);
     }
 
     /**
-     * Method that is used commonly for both invalid username and invalid password
-     * @param message
+     * Method is used to handle the access denied exception
+     * This is when the user is authenticated but is not authorized to perform the requested
+     * operation
+     * @param exception
      * @return
+     * @throws JsonProcessingException
      */
-    private ResponseEntity<ZeusApiResponse<AuthenticationResponse>> invalidCredentials(String message) {
-        ZeusApiResponse apiResponse = ZeusApiResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .message(message)
-                .status(HttpStatus.UNAUTHORIZED)
-                .statusCode(401)
-                .response(AuthenticationResponse.builder()
-                        .authMessage(message)
-                        .isAuthenticated(false)
-                        .build())
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ZeusApiResponse<ApiExceptionList>> handleAccessDeniedException(AccessDeniedException exception) throws JsonProcessingException {
+        log.info("Inside access denied exception handler");
+        List<ApiException> errors = new ArrayList<>();
+        ApiException apiException = ApiException.builder()
+                .exceptionCode("100003")
+                .exceptionMessage(exception.getMessage())
                 .build();
-        return new ResponseEntity<>(apiResponse, HttpStatus.UNAUTHORIZED);
+        errors.add(apiException);
+        ApiExceptionList exceptionList = ApiExceptionList.builder().exceptions(errors).build();
+        ZeusApiResponse<ApiExceptionList> apiResponse = ZeusApiResponse.<ApiExceptionList>builder()
+                .timestamp(LocalDateTime.now())
+                .response(exceptionList)
+                .status(HttpStatus.FORBIDDEN)
+                .statusCode(403)
+                .reason(ApiResponseConstants.FORBIDDEN)
+                .message(ApiResponseConstants.FAIL)
+                .developerMessage(ApiResponseConstants.FAILURE_REASON)
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.FORBIDDEN);
     }
 }
