@@ -1,6 +1,8 @@
 package com.brihaspathee.zeus.web.resource.interfaces;
 
 import com.brihaspathee.zeus.exception.ApiExceptionList;
+import com.brihaspathee.zeus.permissions.AuthorityCreatePermission;
+import com.brihaspathee.zeus.permissions.AuthorityReadPermission;
 import com.brihaspathee.zeus.web.model.AuthorityDto;
 import com.brihaspathee.zeus.web.model.AuthorityList;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
@@ -51,6 +53,7 @@ public interface AuthorityAPI {
             }
     )
     @GetMapping
+    @AuthorityReadPermission
     ResponseEntity<ZeusApiResponse<AuthorityList>> getAllAuthorities();
 
     /**
@@ -80,5 +83,6 @@ public interface AuthorityAPI {
                     })
     })
     @PostMapping
+    @AuthorityCreatePermission
     ResponseEntity<ZeusApiResponse<AuthorityDto>> createAuthority(@RequestBody AuthorityDto authorityDto);
 }

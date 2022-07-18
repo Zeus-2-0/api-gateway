@@ -1,6 +1,9 @@
 package com.brihaspathee.zeus.web.resource.interfaces;
 
 import com.brihaspathee.zeus.exception.ApiExceptionList;
+import com.brihaspathee.zeus.permissions.UserCreatePermission;
+import com.brihaspathee.zeus.permissions.UserReadPermission;
+import com.brihaspathee.zeus.permissions.UserUpdatePermission;
 import com.brihaspathee.zeus.web.model.UserDto;
 import com.brihaspathee.zeus.web.model.UserList;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
@@ -50,6 +53,7 @@ public interface UserAPI {
             }
     )
     @GetMapping
+    @UserReadPermission
     ResponseEntity<ZeusApiResponse<UserList>> getAllUsers();
 
     /**
@@ -79,6 +83,7 @@ public interface UserAPI {
                     })
     })
     @PostMapping
+    @UserCreatePermission
     ResponseEntity<ZeusApiResponse<UserDto>> createUser(@RequestBody UserDto userDto);
 
     /**
@@ -108,5 +113,6 @@ public interface UserAPI {
                     })
     })
     @PutMapping("/{userId}")
+    @UserUpdatePermission
     ResponseEntity<ZeusApiResponse<UserDto>> updateUser(@PathVariable UUID userId, @RequestBody UserDto userDto);
 }
