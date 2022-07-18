@@ -62,7 +62,7 @@ public interface AuthorityAPI {
      */
     @Operation(
             method = "POST",
-            description = "Create a new authority",
+            description = "Create a new authority in the system",
             tags = {"security"}
     )
     @ApiResponses(value = {
