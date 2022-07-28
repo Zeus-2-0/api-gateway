@@ -1,5 +1,6 @@
 package com.brihaspathee.zeus.web.model;
 
+import com.brihaspathee.zeus.security.model.UserDto;
 import lombok.*;
 
 import java.time.LocalDate;

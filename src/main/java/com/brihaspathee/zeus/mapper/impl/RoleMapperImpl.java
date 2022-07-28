@@ -3,7 +3,7 @@ package com.brihaspathee.zeus.mapper.impl;
 import com.brihaspathee.zeus.domain.security.Role;
 import com.brihaspathee.zeus.mapper.interfaces.AuthorityMapper;
 import com.brihaspathee.zeus.mapper.interfaces.RoleMapper;
-import com.brihaspathee.zeus.web.model.RoleDto;
+import com.brihaspathee.zeus.security.model.RoleDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

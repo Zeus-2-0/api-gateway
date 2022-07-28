@@ -2,7 +2,7 @@ package com.brihaspathee.zeus.mapper.impl;
 
 import com.brihaspathee.zeus.domain.security.Authority;
 import com.brihaspathee.zeus.mapper.interfaces.AuthorityMapper;
-import com.brihaspathee.zeus.web.model.AuthorityDto;
+import com.brihaspathee.zeus.security.model.AuthorityDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

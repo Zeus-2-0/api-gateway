@@ -47,6 +47,152 @@
               ]
             }
           }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "403",
+            "authException": true,
+            "exceptionMessage": "403 FORBIDDEN",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "password"
+            },
+            "expectedUserList": {
+              "users": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "password"
+            },
+            "expectedUserList": {
+              "users": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "incorrect-password"
+            },
+            "expectedUserList": {
+              "users": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "incorrect-password"
+            },
+            "expectedUserList": {
+              "users": []
+            }
+          }
+        }
+      ]
+    },
+    {"testMethodName": "testGetUserByUsername",
+      "testData": [
+        {
+          "testData": {
+            "exceptionExpected": false,
+            "httpStatusCode": "200",
+            "loggedInUser": {
+              "username": "john",
+              "password": "password"
+            },
+            "userDtoRequest": {
+              "username": "mary"
+            },
+            "expectedUserList": {
+              "userDtos": [
+                {
+                  "userId": "ac5f043b-67b0-4878-8819-5d47ed8dad29",
+                  "username": "mary",
+                  "password": "password"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "403",
+            "authException": true,
+            "exceptionMessage": "403 FORBIDDEN",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "password"
+            },
+            "expectedUserList": {
+              "users": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "password"
+            },
+            "expectedUserList": {
+              "users": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "incorrect-password"
+            },
+            "expectedUserList": {
+              "users": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "incorrect-password"
+            },
+            "expectedUserList": {
+              "users": []
+            }
+          }
         }
       ]
     }

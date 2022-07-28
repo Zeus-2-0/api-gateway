@@ -1,9 +1,7 @@
 package com.brihaspathee.zeus.service.interfaces;
 
-import com.brihaspathee.zeus.web.model.RoleDto;
-import com.brihaspathee.zeus.web.model.RoleList;
-
-import java.util.UUID;
+import com.brihaspathee.zeus.security.model.RoleDto;
+import com.brihaspathee.zeus.security.model.RoleList;
 
 /**
  * Created in Intellij IDEA

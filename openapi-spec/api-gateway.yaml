@@ -13,18 +13,291 @@ servers:
 - url: http://localhost:8088
   description: Development Server
 paths:
-  /api/v1/zeus:
+  /api/v1/zeus/security/user/{userId}:
+    put:
+      tags:
+      - security
+      description: Update an existing user
+      operationId: updateUser
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+        required: true
+      responses:
+        "201":
+          description: Successfully updated the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+  /api/v1/zeus/security/role/{roleId}:
+    put:
+      tags:
+      - security
+      description: Update an existing role
+      operationId: updateRole
+      parameters:
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleDto'
+        required: true
+      responses:
+        "201":
+          description: Successfully created the role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+  /zeus/jwt/authenticate:
+    post:
+      tags:
+      - trading-partner
+      description: Create a new trading partner
+      operationId: jwtAuthentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationRequest'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationResponse'
+        "201":
+          description: Successfully created the trading partner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationResponse'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationResponse'
+  /api/v1/zeus/security/user:
     get:
       tags:
-      - welcome-api-impl
-      operationId: welcome
+      - security
+      description: Get all the users in the system
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: Successfully retrieved all the users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
+    post:
+      tags:
+      - security
+      description: Create a new user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+        required: true
+      responses:
+        "201":
+          description: Successfully created the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+  /api/v1/zeus/security/role:
+    get:
+      tags:
+      - security
+      description: Get all the roles in the system
+      operationId: getAllRoles
+      responses:
+        "200":
+          description: Successfully retrieved all the roles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
+    post:
+      tags:
+      - security
+      description: Create a new role
+      operationId: createRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleDto'
+        required: true
+      responses:
+        "201":
+          description: Successfully created the role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+  /api/v1/zeus/security/authority:
+    get:
+      tags:
+      - security
+      description: Get all the permissions in the system
+      operationId: getAllAuthorities
+      responses:
+        "200":
+          description: Successfully retrieved all the Permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
+    post:
+      tags:
+      - security
+      description: Create a new authority in the system
+      operationId: createAuthority
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorityDto'
+        required: true
+      responses:
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "201":
+          description: Successfully created the authority
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorityDto'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+  /api/v1/zeus/ref-data/internal/list-types:
+    get:
+      tags:
+      - reference-data
+      description: Get all the internal list types that are present in the system
+      operationId: getAllInternalListTypes
+      responses:
+        "200":
+          description: Successfully retrieved all Internal List types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalListTypesDto'
+    post:
+      tags:
+      - reference-data
+      description: Get all the codes of a reference data list types
+      operationId: Get Internal Codes for List Types
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalListTypesDto'
+        required: true
+      responses:
+        "200":
+          description: Successfully retrieved all the codes of an internal lists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalListTypesDto'
+  /zeus/basic/authenticate:
+    get:
+      tags:
+      - authentication-api-impl
+      operationId: basicAuthentication
+      parameters:
+      - name: user
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/User'
       responses:
         "200":
           description: OK
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WelcomeDto'
+                $ref: '#/components/schemas/ZeusApiResponseAuthenticationResponse'
   /api/v1/zeus/{username}:
     get:
       tags:
@@ -44,10 +317,632 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WelcomeDto'
+  /api/v1/zeus/welcome:
+    get:
+      tags:
+      - welcome
+      description: Get a generic Welcome
+      operationId: welcome
+      responses:
+        "200":
+          description: Successfully retrieved a generic welcome message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WelcomeDto'
+  /api/v1/zeus/tp:
+    get:
+      tags:
+      - trading-partner
+      description: Get all the trading partners
+      operationId: getAllTradingPartners
+      responses:
+        "200":
+          description: Successfully retrieved all the trading partners
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartnerList'
+  /api/v1/zeus/tp/{tradingPartnerId}:
+    get:
+      tags:
+      - trading-partner
+      description: Get the trading partner by trading partner id
+      operationId: getTradingPartnerById
+      parameters:
+      - name: tradingPartnerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved the trading partner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartnerDto'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartnerDto'
+  /api/v1/zeus/tp/search:
+    get:
+      tags:
+      - trading-partner
+      description: Get all the trading partners
+      operationId: getTradingPartnerByParameter
+      parameters:
+      - name: searchParams
+        in: query
+        required: true
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved all the trading partners
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartnerList'
+  /api/v1/zeus/security/user/username/{username}:
+    get:
+      tags:
+      - security
+      description: Get user by username
+      operationId: getUserByUsername
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
+  /api/v1/zeus/security/user/user-id/{userId}:
+    get:
+      tags:
+      - security
+      description: Get user by user id
+      operationId: getUserById
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Successfully retrieved the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
+  /api/v1/zeus/ref-data/internal/list-types/{listTypeName}:
+    get:
+      tags:
+      - reference-data
+      description: Get all the codes of a reference data list type
+      operationId: Get Internal Codes for List Type
+      parameters:
+      - name: listTypeName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved all the codes of an internal list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalListTypeDto'
+  /api/v1/zeus/account:
+    get:
+      tags:
+      - accounts
+      description: Get all the accounts
+      operationId: getAllAccounts
+      responses:
+        "200":
+          description: Successfully retrieved all the accounts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
+  /api/v1/zeus/account/search:
+    get:
+      tags:
+      - accounts
+      description: Get accounts based on the search parameters
+      operationId: getAccountByParameters
+      parameters:
+      - name: searchParams
+        in: query
+        required: true
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved the accounts that matched the search
+            params
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
 components:
   schemas:
+    AuthorityDto:
+      type: object
+      properties:
+        authorityId:
+          type: string
+          format: uuid
+        permission:
+          type: string
+    RoleDto:
+      type: object
+      properties:
+        roleId:
+          type: string
+          format: uuid
+        roleName:
+          type: string
+        authorityDtos:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorityDto'
+    UserDto:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        username:
+          type: string
+        password:
+          type: string
+        roleDtos:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDto'
+    ApiException:
+      type: object
+      properties:
+        exceptionCode:
+          type: string
+        exceptionMessage:
+          type: string
+    ApiExceptionList:
+      type: object
+      properties:
+        exceptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiException'
+    AuthenticationRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    AuthenticationResponse:
+      type: object
+      properties:
+        authMessage:
+          type: string
+        authToken:
+          type: string
+        authExpiration:
+          type: string
+          format: date-time
+        userDto:
+          $ref: '#/components/schemas/UserDto'
+        authenticated:
+          type: boolean
+    InternalListTypeDto:
+      required:
+      - displayName
+      - internalListTypeName
+      type: object
+      properties:
+        internalListTypeSK:
+          type: integer
+          description: The key of the internal list type
+          format: int64
+          example: 1001
+        internalListTypeName:
+          type: string
+          description: Internal list type name
+          example: Identifier
+        internalListTypeDesc:
+          type: string
+          description: Internal list type description
+          example: Contains the list of all the internal identifiers
+        displayName:
+          type: string
+          description: Display name of the list type
+          example: Identifier
+        internalRefDataList:
+          type: array
+          description: The list of the internal ref-data codes that are in the internal
+            list
+          items:
+            $ref: '#/components/schemas/InternalRefData'
+    InternalListTypesDto:
+      type: object
+      properties:
+        internalListTypes:
+          type: array
+          description: Contains the list of all the internal reference data lists
+          items:
+            $ref: '#/components/schemas/InternalListTypeDto'
+    InternalRefData:
+      required:
+      - displayName
+      type: object
+      properties:
+        listCode:
+          type: string
+        listTypeDto:
+          $ref: '#/components/schemas/InternalListTypeDto'
+        listCodeDesc:
+          type: string
+        displayName:
+          type: string
+          description: Display name of the list code
+          example: Social Security Number
+      description: The list of the internal ref-data codes that are in the internal
+        list
+    Authority:
+      type: object
+      properties:
+        authorityId:
+          type: string
+          format: uuid
+        permission:
+          type: string
+        roles:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        createdDate:
+          type: string
+          format: date-time
+        updatedDate:
+          type: string
+          format: date-time
+    GrantedAuthority:
+      type: object
+      properties:
+        authority:
+          type: string
+    Role:
+      type: object
+      properties:
+        roleId:
+          type: string
+          format: uuid
+        roleName:
+          type: string
+        users:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        authorities:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Authority'
+        createdDate:
+          type: string
+          format: date-time
+        updatedDate:
+          type: string
+          format: date-time
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        username:
+          type: string
+        password:
+          type: string
+        accountNotExpired:
+          type: boolean
+        accountNotLocked:
+          type: boolean
+        credentialsNotExpired:
+          type: boolean
+        enabled:
+          type: boolean
+        roles:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        createdDate:
+          type: string
+          format: date-time
+        updatedDate:
+          type: string
+          format: date-time
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        credentialsNonExpired:
+          type: boolean
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantedAuthority'
+    ZeusApiResponseAuthenticationResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        statusCode:
+          type: integer
+          format: int32
+        status:
+          type: string
+          enum:
+          - 100 CONTINUE
+          - 101 SWITCHING_PROTOCOLS
+          - 102 PROCESSING
+          - 103 CHECKPOINT
+          - 200 OK
+          - 201 CREATED
+          - 202 ACCEPTED
+          - 203 NON_AUTHORITATIVE_INFORMATION
+          - 204 NO_CONTENT
+          - 205 RESET_CONTENT
+          - 206 PARTIAL_CONTENT
+          - 207 MULTI_STATUS
+          - 208 ALREADY_REPORTED
+          - 226 IM_USED
+          - 300 MULTIPLE_CHOICES
+          - 301 MOVED_PERMANENTLY
+          - 302 FOUND
+          - 302 MOVED_TEMPORARILY
+          - 303 SEE_OTHER
+          - 304 NOT_MODIFIED
+          - 305 USE_PROXY
+          - 307 TEMPORARY_REDIRECT
+          - 308 PERMANENT_REDIRECT
+          - 400 BAD_REQUEST
+          - 401 UNAUTHORIZED
+          - 402 PAYMENT_REQUIRED
+          - 403 FORBIDDEN
+          - 404 NOT_FOUND
+          - 405 METHOD_NOT_ALLOWED
+          - 406 NOT_ACCEPTABLE
+          - 407 PROXY_AUTHENTICATION_REQUIRED
+          - 408 REQUEST_TIMEOUT
+          - 409 CONFLICT
+          - 410 GONE
+          - 411 LENGTH_REQUIRED
+          - 412 PRECONDITION_FAILED
+          - 413 PAYLOAD_TOO_LARGE
+          - 413 REQUEST_ENTITY_TOO_LARGE
+          - 414 URI_TOO_LONG
+          - 414 REQUEST_URI_TOO_LONG
+          - 415 UNSUPPORTED_MEDIA_TYPE
+          - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+          - 417 EXPECTATION_FAILED
+          - 418 I_AM_A_TEAPOT
+          - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+          - 420 METHOD_FAILURE
+          - 421 DESTINATION_LOCKED
+          - 422 UNPROCESSABLE_ENTITY
+          - 423 LOCKED
+          - 424 FAILED_DEPENDENCY
+          - 425 TOO_EARLY
+          - 426 UPGRADE_REQUIRED
+          - 428 PRECONDITION_REQUIRED
+          - 429 TOO_MANY_REQUESTS
+          - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+          - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+          - 500 INTERNAL_SERVER_ERROR
+          - 501 NOT_IMPLEMENTED
+          - 502 BAD_GATEWAY
+          - 503 SERVICE_UNAVAILABLE
+          - 504 GATEWAY_TIMEOUT
+          - 505 HTTP_VERSION_NOT_SUPPORTED
+          - 506 VARIANT_ALSO_NEGOTIATES
+          - 507 INSUFFICIENT_STORAGE
+          - 508 LOOP_DETECTED
+          - 509 BANDWIDTH_LIMIT_EXCEEDED
+          - 510 NOT_EXTENDED
+          - 511 NETWORK_AUTHENTICATION_REQUIRED
+        reason:
+          type: string
+        message:
+          type: string
+        developerMessage:
+          type: string
+        response:
+          $ref: '#/components/schemas/AuthenticationResponse'
     WelcomeDto:
       type: object
       properties:
         username:
           type: string
+    TradingPartnerDto:
+      required:
+      - lineOfBusinessTypeCode
+      - marketplaceTypeCode
+      - name
+      - receiverId
+      - senderId
+      - stateTypeCode
+      - tradingPartnerId
+      type: object
+      properties:
+        tradingPartnerSK:
+          type: string
+          description: Trading Partner SK - This is a UUID value
+          format: uuid
+          readOnly: true
+          example: 657cfd75-634e-49f1-9556-4d79f79848ec
+        tradingPartnerId:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Trading Partner ID
+          example: 683234GHD42
+        name:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Trading Partner Name
+          example: FL FFM
+        description:
+          type: string
+          description: A short description of the trading partner
+          example: FL State FFM TP
+        senderId:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Sender Id configured for the TP
+          example: CMSFFM
+        receiverId:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Receiver Id configured for the TP
+          example: "96633"
+        lineOfBusinessTypeCode:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: LOB associated with the trading partner
+          example: HIX
+        marketplaceTypeCode:
+          maxLength: 10
+          minLength: 2
+          type: string
+          description: Marketplace Type Code of the trading partner
+          example: FFM
+        stateTypeCode:
+          maxLength: 2
+          minLength: 2
+          type: string
+          description: State of the trading partner
+          example: FL
+      description: Trading Partner Object
+    TradingPartnerList:
+      type: object
+      properties:
+        tradingPartnerDtos:
+          type: array
+          items:
+            $ref: '#/components/schemas/TradingPartnerDto'
+    ZeusApiResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        statusCode:
+          type: integer
+          format: int32
+        status:
+          type: string
+          enum:
+          - 100 CONTINUE
+          - 101 SWITCHING_PROTOCOLS
+          - 102 PROCESSING
+          - 103 CHECKPOINT
+          - 200 OK
+          - 201 CREATED
+          - 202 ACCEPTED
+          - 203 NON_AUTHORITATIVE_INFORMATION
+          - 204 NO_CONTENT
+          - 205 RESET_CONTENT
+          - 206 PARTIAL_CONTENT
+          - 207 MULTI_STATUS
+          - 208 ALREADY_REPORTED
+          - 226 IM_USED
+          - 300 MULTIPLE_CHOICES
+          - 301 MOVED_PERMANENTLY
+          - 302 FOUND
+          - 302 MOVED_TEMPORARILY
+          - 303 SEE_OTHER
+          - 304 NOT_MODIFIED
+          - 305 USE_PROXY
+          - 307 TEMPORARY_REDIRECT
+          - 308 PERMANENT_REDIRECT
+          - 400 BAD_REQUEST
+          - 401 UNAUTHORIZED
+          - 402 PAYMENT_REQUIRED
+          - 403 FORBIDDEN
+          - 404 NOT_FOUND
+          - 405 METHOD_NOT_ALLOWED
+          - 406 NOT_ACCEPTABLE
+          - 407 PROXY_AUTHENTICATION_REQUIRED
+          - 408 REQUEST_TIMEOUT
+          - 409 CONFLICT
+          - 410 GONE
+          - 411 LENGTH_REQUIRED
+          - 412 PRECONDITION_FAILED
+          - 413 PAYLOAD_TOO_LARGE
+          - 413 REQUEST_ENTITY_TOO_LARGE
+          - 414 URI_TOO_LONG
+          - 414 REQUEST_URI_TOO_LONG
+          - 415 UNSUPPORTED_MEDIA_TYPE
+          - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+          - 417 EXPECTATION_FAILED
+          - 418 I_AM_A_TEAPOT
+          - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+          - 420 METHOD_FAILURE
+          - 421 DESTINATION_LOCKED
+          - 422 UNPROCESSABLE_ENTITY
+          - 423 LOCKED
+          - 424 FAILED_DEPENDENCY
+          - 425 TOO_EARLY
+          - 426 UPGRADE_REQUIRED
+          - 428 PRECONDITION_REQUIRED
+          - 429 TOO_MANY_REQUESTS
+          - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+          - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+          - 500 INTERNAL_SERVER_ERROR
+          - 501 NOT_IMPLEMENTED
+          - 502 BAD_GATEWAY
+          - 503 SERVICE_UNAVAILABLE
+          - 504 GATEWAY_TIMEOUT
+          - 505 HTTP_VERSION_NOT_SUPPORTED
+          - 506 VARIANT_ALSO_NEGOTIATES
+          - 507 INSUFFICIENT_STORAGE
+          - 508 LOOP_DETECTED
+          - 509 BANDWIDTH_LIMIT_EXCEEDED
+          - 510 NOT_EXTENDED
+          - 511 NETWORK_AUTHENTICATION_REQUIRED
+        reason:
+          type: string
+        message:
+          type: string
+        developerMessage:
+          type: string
+        response:
+          type: object

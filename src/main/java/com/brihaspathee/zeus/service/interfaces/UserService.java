@@ -1,7 +1,9 @@
 package com.brihaspathee.zeus.service.interfaces;
 
-import com.brihaspathee.zeus.web.model.UserDto;
-import com.brihaspathee.zeus.web.model.UserList;
+import com.brihaspathee.zeus.security.model.UserDto;
+import com.brihaspathee.zeus.security.model.UserList;
+
+import java.util.UUID;
 
 /**
  * Created in Intellij IDEA
@@ -26,4 +28,18 @@ public interface UserService {
      * @return
      */
     UserDto saveUser(UserDto userDto);
+
+    /**
+     * Get user by user id
+     * @param userId
+     * @return
+     */
+    UserList getUserById(UUID userId);
+
+    /**
+     * Get user by username
+     * @param username
+     * @return
+     */
+    UserList getUserByUsername(String username);
 }

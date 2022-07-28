@@ -1,8 +1,8 @@
 package com.brihaspathee.zeus.web.resource.impl;
 
+import com.brihaspathee.zeus.reference.data.model.InternalListTypeDto;
+import com.brihaspathee.zeus.reference.data.model.InternalListTypesDto;
 import com.brihaspathee.zeus.service.interfaces.ReferenceDataService;
-import com.brihaspathee.zeus.web.model.InternalListTypesDto;
-import com.brihaspathee.zeus.web.model.InternalRefDataList;
 import com.brihaspathee.zeus.web.resource.interfaces.ReferenceDataAPI;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -35,8 +35,9 @@ public class ReferenceDataAPIImpl implements ReferenceDataAPI {
      * @return Internal Reference Data List
      */
     @Override
-    public InternalRefDataList getInternalRefDataList(String listTypeName) {
-        return referenceDataService.getInternalRefData(listTypeName);
+    public ResponseEntity<ZeusApiResponse<InternalListTypeDto>> getInternalRefDataList(String listTypeName) {
+        return ResponseEntity.ok(
+                referenceDataService.getInternalRefData(listTypeName));
     }
 
     /**
@@ -47,5 +48,15 @@ public class ReferenceDataAPIImpl implements ReferenceDataAPI {
     public ResponseEntity<ZeusApiResponse<InternalListTypesDto>> getAllInternalListTypes() {
 
         return ResponseEntity.ok(referenceDataService.getAllInternalListTypes());
+    }
+
+    /**
+     * Get all the internal lists for each of the internal list types
+     * @param internalListTypesDto
+     * @return
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<InternalListTypesDto>> getInternalCodesForListTypes(InternalListTypesDto internalListTypesDto) {
+        return ResponseEntity.ok(referenceDataService.getInternalCodesForListTypes(internalListTypesDto));
     }
 }
