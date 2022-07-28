@@ -1,7 +1,7 @@
 package com.brihaspathee.zeus.service.interfaces;
 
-import com.brihaspathee.zeus.web.model.InternalListTypesDto;
-import com.brihaspathee.zeus.web.model.InternalRefDataList;
+import com.brihaspathee.zeus.reference.data.model.InternalListTypeDto;
+import com.brihaspathee.zeus.reference.data.model.InternalListTypesDto;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 
 /**
@@ -20,11 +20,18 @@ public interface ReferenceDataService {
      * @param listTypeName
      * @return
      */
-    InternalRefDataList getInternalRefData(String listTypeName);
+    ZeusApiResponse<InternalListTypeDto> getInternalRefData(String listTypeName);
 
     /**
      * Get all the list types that are present in the system
      * @return
      */
     ZeusApiResponse<InternalListTypesDto> getAllInternalListTypes();
+
+    /**
+     * Get all the codes for the list types passed in
+     * @param internalListTypesDto
+     * @return
+     */
+    ZeusApiResponse<InternalListTypesDto> getInternalCodesForListTypes(InternalListTypesDto internalListTypesDto);
 }

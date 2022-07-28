@@ -1,7 +1,7 @@
 package com.brihaspathee.zeus.mapper.interfaces;
 
 import com.brihaspathee.zeus.domain.security.Authority;
-import com.brihaspathee.zeus.web.model.AuthorityDto;
+import com.brihaspathee.zeus.security.model.AuthorityDto;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.brihaspathee.zeus.web.resource.impl;
 
 import com.brihaspathee.zeus.constants.ApiResponseConstants;
+import com.brihaspathee.zeus.security.model.UserDto;
+import com.brihaspathee.zeus.security.model.UserList;
 import com.brihaspathee.zeus.service.interfaces.UserService;
-import com.brihaspathee.zeus.web.model.UserDto;
-import com.brihaspathee.zeus.web.model.UserList;
 import com.brihaspathee.zeus.web.resource.interfaces.UserAPI;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +41,44 @@ public class UserAPIImpl implements UserAPI {
     @Override
     public ResponseEntity<ZeusApiResponse<UserList>> getAllUsers() {
         UserList userList = userService.getAllUsers();
+        ZeusApiResponse<UserList> apiResponse = ZeusApiResponse.<UserList>builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(200)
+                .response(userList)
+                .message(ApiResponseConstants.SUCCESS)
+                .developerMessage(ApiResponseConstants.SUCCESS_REASON)
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    /**
+     * Get user by user id
+     * @param userId
+     * @return
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<UserList>> getUserById(UUID userId) {
+        UserList userList = userService.getUserById(userId);
+        ZeusApiResponse<UserList> apiResponse = ZeusApiResponse.<UserList>builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(200)
+                .response(userList)
+                .message(ApiResponseConstants.SUCCESS)
+                .developerMessage(ApiResponseConstants.SUCCESS_REASON)
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    /**
+     * Get user by username
+     * @param username
+     * @return
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<UserList>> getUserByUsername(String username) {
+        UserList userList = userService.getUserByUsername(username);
         ZeusApiResponse<UserList> apiResponse = ZeusApiResponse.<UserList>builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

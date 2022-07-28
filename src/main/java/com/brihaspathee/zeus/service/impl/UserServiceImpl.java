@@ -2,20 +2,21 @@ package com.brihaspathee.zeus.service.impl;
 
 import com.brihaspathee.zeus.domain.repository.RoleRepository;
 import com.brihaspathee.zeus.domain.repository.UserRepository;
-import com.brihaspathee.zeus.domain.security.Authority;
 import com.brihaspathee.zeus.domain.security.Role;
 import com.brihaspathee.zeus.domain.security.User;
-import com.brihaspathee.zeus.exception.AuthorityNotFoundException;
 import com.brihaspathee.zeus.exception.RoleNotFoundException;
+import com.brihaspathee.zeus.exception.UserNotFoundException;
 import com.brihaspathee.zeus.mapper.interfaces.UserMapper;
+import com.brihaspathee.zeus.security.model.UserDto;
+import com.brihaspathee.zeus.security.model.UserList;
 import com.brihaspathee.zeus.service.interfaces.UserService;
-import com.brihaspathee.zeus.web.model.UserDto;
-import com.brihaspathee.zeus.web.model.UserList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Created in Intellij IDEA
@@ -92,5 +93,39 @@ public class UserServiceImpl implements UserService {
         log.info("User to be updated:{}", user);
         user = userRepository.save(user);
         return userMapper.userToUserDto(user);
+    }
+
+    /**
+     * Get user by user id
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserList getUserById(UUID userId) {
+        User user = userRepository.findById(userId).orElseThrow( () -> {
+            throw new UserNotFoundException("User with user id " + userId + " not found");
+        });
+        UserDto userDto = userMapper.userToUserDto(user);
+        UserList userList = UserList.builder()
+                .userDtos(Arrays.asList(userDto))
+                .build();
+        return userList;
+    }
+
+    /**
+     * Get user by username
+     * @param username
+     * @return
+     */
+    @Override
+    public UserList getUserByUsername(String username) {
+        User user = userRepository.findUserByUsername(username).orElseThrow(() -> {
+            throw new UserNotFoundException("User with username " + username + " not found");
+        });
+        UserDto userDto = userMapper.userToUserDto(user);
+        UserList userList = UserList.builder()
+                .userDtos(Arrays.asList(userDto))
+                .build();
+        return userList;
     }
 }

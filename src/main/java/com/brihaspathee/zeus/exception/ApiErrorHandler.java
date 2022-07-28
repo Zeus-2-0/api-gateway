@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -116,5 +118,41 @@ public class ApiErrorHandler {
                 .developerMessage(ApiResponseConstants.FAILURE_REASON)
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.FORBIDDEN);
+    }
+
+    /**
+     * Occurs when a user is not authenticated to access the API endpoint
+     * @param exception
+     * @return
+     * @throws JsonProcessingException
+     */
+    @ExceptionHandler(HttpClientErrorException.class)
+    public ResponseEntity<ZeusApiResponse<ApiExceptionList>> handleClientErrorException(HttpClientErrorException exception) throws JsonProcessingException {
+        log.info("Inside http client error exception: {}", exception.getRawStatusCode());
+        if(exception.getRawStatusCode() == 401){
+            ZeusApiResponse apiResponse = ZeusApiResponse.builder()
+                    .timestamp(LocalDateTime.now())
+                    .message("UNAUTHORIZED")
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .statusCode(401)
+                    .response(AuthenticationResponse.builder()
+                            .authMessage("Authentication Failed")
+                            .isAuthenticated(false)
+                            .build())
+                    .build();
+            return new ResponseEntity<>(apiResponse, HttpStatus.UNAUTHORIZED);
+        }else {
+            ZeusApiResponse apiResponse = ZeusApiResponse.builder()
+                    .timestamp(LocalDateTime.now())
+                    .message("Unknown exception occured")
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .statusCode(500)
+                    .response(AuthenticationResponse.builder()
+                            .authMessage("Authentication Failed")
+                            .isAuthenticated(false)
+                            .build())
+                    .build();
+            return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

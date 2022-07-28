@@ -3,14 +3,12 @@ package com.brihaspathee.zeus.service.impl;
 import com.brihaspathee.zeus.domain.repository.AuthorityRepository;
 import com.brihaspathee.zeus.domain.security.Authority;
 import com.brihaspathee.zeus.mapper.interfaces.AuthorityMapper;
+import com.brihaspathee.zeus.security.model.AuthorityDto;
+import com.brihaspathee.zeus.security.model.AuthorityList;
 import com.brihaspathee.zeus.service.interfaces.AuthorityService;
-import com.brihaspathee.zeus.web.model.AuthorityDto;
-import com.brihaspathee.zeus.web.model.AuthorityList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created in Intellij IDEA

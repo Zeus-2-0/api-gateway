@@ -1,7 +1,7 @@
 package com.brihaspathee.zeus.mapper.interfaces;
 
 import com.brihaspathee.zeus.domain.security.Role;
-import com.brihaspathee.zeus.web.model.RoleDto;
+import com.brihaspathee.zeus.security.model.RoleDto;
 
 import java.util.List;
 

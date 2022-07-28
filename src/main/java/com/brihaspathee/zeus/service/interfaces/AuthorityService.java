@@ -1,7 +1,7 @@
 package com.brihaspathee.zeus.service.interfaces;
 
-import com.brihaspathee.zeus.web.model.AuthorityDto;
-import com.brihaspathee.zeus.web.model.AuthorityList;
+import com.brihaspathee.zeus.security.model.AuthorityDto;
+import com.brihaspathee.zeus.security.model.AuthorityList;
 
 /**
  * Created in Intellij IDEA

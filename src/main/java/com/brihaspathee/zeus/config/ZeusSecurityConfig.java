@@ -37,7 +37,9 @@ public class ZeusSecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui/**",
             "/h2-console/**",
             "/host",
-            "/zeus/jwt/authenticate"
+            "/zeus/jwt/authenticate",
+            "/swagger-ui.html",
+            "/v3/api-docs.yaml"
             // other public endpoints of your API may be appended to this array
     };
 

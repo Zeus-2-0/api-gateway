@@ -1,7 +1,7 @@
 package com.brihaspathee.zeus.mapper.interfaces;
 
 import com.brihaspathee.zeus.domain.security.User;
-import com.brihaspathee.zeus.web.model.UserDto;
+import com.brihaspathee.zeus.security.model.UserDto;
 
 import java.util.List;
 

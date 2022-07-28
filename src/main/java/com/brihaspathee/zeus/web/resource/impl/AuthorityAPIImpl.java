@@ -1,10 +1,9 @@
 package com.brihaspathee.zeus.web.resource.impl;
 
 import com.brihaspathee.zeus.constants.ApiResponseConstants;
+import com.brihaspathee.zeus.security.model.AuthorityDto;
+import com.brihaspathee.zeus.security.model.AuthorityList;
 import com.brihaspathee.zeus.service.interfaces.AuthorityService;
-import com.brihaspathee.zeus.web.model.AuthorityDto;
-import com.brihaspathee.zeus.web.model.AuthorityList;
-import com.brihaspathee.zeus.web.model.RoleDto;
 import com.brihaspathee.zeus.web.resource.interfaces.AuthorityAPI;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import lombok.RequiredArgsConstructor;

@@ -6,17 +6,14 @@ import com.brihaspathee.zeus.domain.security.Authority;
 import com.brihaspathee.zeus.domain.security.Role;
 import com.brihaspathee.zeus.exception.AuthorityNotFoundException;
 import com.brihaspathee.zeus.mapper.interfaces.RoleMapper;
+import com.brihaspathee.zeus.security.model.RoleDto;
+import com.brihaspathee.zeus.security.model.RoleList;
 import com.brihaspathee.zeus.service.interfaces.RoleService;
-import com.brihaspathee.zeus.web.model.RoleDto;
-import com.brihaspathee.zeus.web.model.RoleList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * Created in Intellij IDEA

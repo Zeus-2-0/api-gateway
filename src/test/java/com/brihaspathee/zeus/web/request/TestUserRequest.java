@@ -1,7 +1,7 @@
 package com.brihaspathee.zeus.web.request;
 
-import com.brihaspathee.zeus.web.model.UserDto;
-import com.brihaspathee.zeus.web.model.UserList;
+import com.brihaspathee.zeus.security.model.UserDto;
+import com.brihaspathee.zeus.security.model.UserList;
 import lombok.*;
 
 /**
@@ -64,4 +64,19 @@ public class TestUserRequest {
      * The user dto that is expected
      */
     private UserDto expectedUserDto;
+
+    @Override
+    public String toString() {
+        return "TestUserRequest{" +
+                "exceptionExpected=" + exceptionExpected +
+                ", exceptionCode='" + exceptionCode + '\'' +
+                ", exceptionMessage='" + exceptionMessage + '\'' +
+                ", httpStatusCode='" + httpStatusCode + '\'' +
+                ", authException=" + authException +
+                ", loggedInUser=" + loggedInUser +
+                ", userDtoRequest=" + userDtoRequest +
+                ", expectedUserList=" + expectedUserList +
+                ", expectedUserDto=" + expectedUserDto +
+                '}';
+    }
 }

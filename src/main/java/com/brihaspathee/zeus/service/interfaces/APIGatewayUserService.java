@@ -1,9 +1,7 @@
 package com.brihaspathee.zeus.service.interfaces;
 
 import com.brihaspathee.zeus.domain.security.User;
-import com.brihaspathee.zeus.web.model.AuthenticationRequest;
 import com.brihaspathee.zeus.web.model.AuthenticationResponse;
-import com.brihaspathee.zeus.web.model.UserDto;
 
 /**
  * Created in Intellij IDEA
