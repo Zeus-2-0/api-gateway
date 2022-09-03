@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 /**
  * Created in Intellij IDEA
@@ -52,13 +53,51 @@ public class AuthorityAPIImpl implements AuthorityAPI {
     }
 
     /**
+     * Get the permission by authority id
+     * @param authorityId
+     * @return
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<AuthorityList>> getAuthorityById(UUID authorityId) {
+        AuthorityList authorityList = authorityService.getAuthorityById(authorityId);
+        ZeusApiResponse<AuthorityList> apiResponse = ZeusApiResponse.<AuthorityList>builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(200)
+                .response(authorityList)
+                .message(ApiResponseConstants.SUCCESS)
+                .developerMessage(ApiResponseConstants.SUCCESS_REASON)
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    /**
+     * Get the permission by authority name
+     * @param permission
+     * @return
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<AuthorityList>> getAuthorityByName(String permission) {
+        AuthorityList authorityList = authorityService.getAuthorityByName(permission);
+        ZeusApiResponse<AuthorityList> apiResponse = ZeusApiResponse.<AuthorityList>builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(200)
+                .response(authorityList)
+                .message(ApiResponseConstants.SUCCESS)
+                .developerMessage(ApiResponseConstants.SUCCESS_REASON)
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    /**
      * Create a new authority
      * @param authorityDto
      * @return
      */
     @Override
     public ResponseEntity<ZeusApiResponse<AuthorityDto>> createAuthority(AuthorityDto authorityDto) {
-        AuthorityDto savedAuthority = authorityService.createAuthority(authorityDto);
+        AuthorityDto savedAuthority = authorityService.saveAuthority(authorityDto);
         ZeusApiResponse<AuthorityDto> apiResponse = ZeusApiResponse.<AuthorityDto>builder()
                 .response(savedAuthority)
                 .developerMessage(ApiResponseConstants.SUCCESS_REASON)
@@ -67,5 +106,25 @@ public class AuthorityAPIImpl implements AuthorityAPI {
                 .status(HttpStatus.CREATED)
                 .build();
         return new ResponseEntity<ZeusApiResponse<AuthorityDto>>(apiResponse, HttpStatus.CREATED);
+    }
+
+    /**
+     * Update an existing authority
+     * @param authorityId
+     * @param authorityDto
+     * @return
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<AuthorityDto>> updateAuthority(UUID authorityId, AuthorityDto authorityDto) {
+        authorityDto.setAuthorityId(authorityId);
+        AuthorityDto savedAuthority = authorityService.saveAuthority(authorityDto);
+        ZeusApiResponse<AuthorityDto> apiResponse = ZeusApiResponse.<AuthorityDto>builder()
+                .response(savedAuthority)
+                .developerMessage(ApiResponseConstants.SUCCESS_REASON)
+                .message(ApiResponseConstants.SUCCESS)
+                .statusCode(204)
+                .status(HttpStatus.NO_CONTENT)
+                .build();
+        return new ResponseEntity<ZeusApiResponse<AuthorityDto>>(apiResponse, HttpStatus.NO_CONTENT);
     }
 }

@@ -56,6 +56,57 @@ public interface RoleAPI {
     @RoleReadPermission
     ResponseEntity<ZeusApiResponse<RoleList>> getAllRoles();
 
+
+    /**
+     * Get Role by role id
+     * @param roleId
+     * @return
+     */
+    @Operation(
+            method = "GET",
+            description = "Get the role by role id",
+            tags = {"security"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved the respective role",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ZeusApiResponse.class))
+                            }
+                    )
+            }
+    )
+    @GetMapping("/role-id/{roleId}")
+    @RoleReadPermission
+    ResponseEntity<ZeusApiResponse<RoleList>> getRoleById(@PathVariable UUID roleId);
+
+    /**
+     * Get Role by role name
+     * @param roleName
+     * @return
+     */
+    @Operation(
+            method = "GET",
+            description = "Get the role by role name",
+            tags = {"security"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved the respective role",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ZeusApiResponse.class))
+                            }
+                    )
+            }
+    )
+    @GetMapping("/role-name/{roleName}")
+    @RoleReadPermission
+    ResponseEntity<ZeusApiResponse<RoleList>> getRoleByRoleName(@PathVariable String roleName);
+
     /**
      * Create a new Role
      * @return
@@ -96,11 +147,8 @@ public interface RoleAPI {
             tags = {"security"}
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201",
-                    description = "Successfully created the role",
-                    content = {
-                            @Content(mediaType = "application/json",schema = @Schema(implementation = RoleDto.class))
-                    }),
+            @ApiResponse(responseCode = "204",
+                    description = "Successfully update the role"),
             @ApiResponse(responseCode = "400",
                     description = "Bad Request",
                     content = {

@@ -14,10 +14,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 /**
  * Created in Intellij IDEA
@@ -57,6 +56,58 @@ public interface AuthorityAPI {
     ResponseEntity<ZeusApiResponse<AuthorityList>> getAllAuthorities();
 
     /**
+     * Get permission for a specific authority by id
+     * @param authorityId
+     * @return
+     */
+    @Operation(
+            operationId = "Get Authority by authority id",
+            method = "GET",
+            description = "Get permission for a specific authority by id",
+            tags = {"security"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved the permission",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ZeusApiResponse.class))
+                            }
+                    )
+            }
+    )
+    @GetMapping("/authority-id/{authorityId}")
+    @AuthorityReadPermission
+    ResponseEntity<ZeusApiResponse<AuthorityList>> getAuthorityById(@PathVariable UUID authorityId);
+
+    /**
+     * Get permission for a specific authority by permission name
+     * @param permission
+     * @return
+     */
+    @Operation(
+            operationId = "Get Authority by permission name",
+            method = "GET",
+            description = "Get permission for a specific authority by permission name",
+            tags = {"security"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved the permission",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ZeusApiResponse.class))
+                            }
+                    )
+            }
+    )
+    @GetMapping("/authority-name/{permission}")
+    @AuthorityReadPermission
+    ResponseEntity<ZeusApiResponse<AuthorityList>> getAuthorityByName(@PathVariable String permission);
+
+    /**
      * Create a new Role
      * @return
      */
@@ -85,4 +136,33 @@ public interface AuthorityAPI {
     @PostMapping
     @AuthorityCreatePermission
     ResponseEntity<ZeusApiResponse<AuthorityDto>> createAuthority(@RequestBody AuthorityDto authorityDto);
+
+    /**
+     * Update an existing Role
+     * @return
+     */
+    @Operation(
+            operationId = "Update an existing authority id",
+            method = "PUT",
+            description = "Update an existing authority in the system",
+            tags = {"security"}
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Successfully update the authority"),
+            @ApiResponse(responseCode = "400",
+                    description = "Bad Request",
+                    content = {
+                            @Content(mediaType = "application/json",schema = @Schema(implementation = ApiExceptionList.class))
+                    }),
+            @ApiResponse(responseCode = "409",
+                    description = "Conflict",
+                    content = {
+                            @Content(mediaType = "application/json",schema = @Schema(implementation = ApiExceptionList.class))
+                    })
+    })
+    @PutMapping("/{authorityId}")
+    @AuthorityCreatePermission
+    ResponseEntity<ZeusApiResponse<AuthorityDto>> updateAuthority(@PathVariable UUID authorityId,
+                                                                  @RequestBody AuthorityDto authorityDto);
 }

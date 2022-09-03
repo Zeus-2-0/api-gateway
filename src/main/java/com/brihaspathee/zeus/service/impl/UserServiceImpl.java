@@ -2,6 +2,7 @@ package com.brihaspathee.zeus.service.impl;
 
 import com.brihaspathee.zeus.domain.repository.RoleRepository;
 import com.brihaspathee.zeus.domain.repository.UserRepository;
+import com.brihaspathee.zeus.domain.security.Authority;
 import com.brihaspathee.zeus.domain.security.Role;
 import com.brihaspathee.zeus.domain.security.User;
 import com.brihaspathee.zeus.exception.RoleNotFoundException;
@@ -12,11 +13,10 @@ import com.brihaspathee.zeus.security.model.UserList;
 import com.brihaspathee.zeus.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created in Intellij IDEA
@@ -31,6 +31,11 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
+    /**
+     * The password encoder to encode the users password
+     */
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * The repository to perform CRUD operations
@@ -65,14 +70,11 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDto saveUser(UserDto userDto) {
-        /*if(userDto.getUserId() == null){
-            boolean rolesPresent = userDto.getRoleDtos().stream().allMatch(roleDto -> {
-                return  roleRepository.existsById(roleDto.getRoleId());
-            });
-            if(!rolesPresent){
-                throw new RoleNotFoundException("One or more roles is not present");
-            }
-        }*/
+        if(userDto.getUserId() != null){
+            getUserById(userDto.getUserId());
+        }
+        String encodedPassword = bCryptPasswordEncoder.encode(userDto.getPassword());
+        userDto.setPassword("{bcrypt}"+encodedPassword);
         boolean rolesPresent = userDto.getRoleDtos().stream().allMatch(roleDto -> {
             if(roleDto.getRoleId() != null){
                 return roleRepository.existsById(roleDto.getRoleId());
@@ -92,6 +94,9 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.userDtoToUser(userDto);
         log.info("User to be updated:{}", user);
         user = userRepository.save(user);
+        user.setRoles(getAuthorities(user.getRoles()));
+        log.info("Updated User:{}", user);
+
         return userMapper.userToUserDto(user);
     }
 
@@ -127,5 +132,20 @@ public class UserServiceImpl implements UserService {
                 .userDtos(Arrays.asList(userDto))
                 .build();
         return userList;
+    }
+
+    /**
+     * This method gets the authorities of each role and gives back the roles with
+     * authorities
+     * @param roles
+     * @return
+     */
+    private Set<Role> getAuthorities(Set<Role> roles){
+        Set<Role> rolesWithAuthorities = new HashSet<>();
+        roles.stream().forEach(role -> {
+            Role role1 = roleRepository.findById(role.getRoleId()).orElseThrow();
+            rolesWithAuthorities.add(role1);
+        });
+        return rolesWithAuthorities;
     }
 }

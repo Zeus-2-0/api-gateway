@@ -5,6 +5,7 @@ import com.brihaspathee.zeus.domain.repository.RoleRepository;
 import com.brihaspathee.zeus.domain.security.Authority;
 import com.brihaspathee.zeus.domain.security.Role;
 import com.brihaspathee.zeus.exception.AuthorityNotFoundException;
+import com.brihaspathee.zeus.exception.RoleNotFoundException;
 import com.brihaspathee.zeus.mapper.interfaces.RoleMapper;
 import com.brihaspathee.zeus.security.model.RoleDto;
 import com.brihaspathee.zeus.security.model.RoleList;
@@ -13,7 +14,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Created in Intellij IDEA
@@ -53,6 +56,36 @@ public class RoleServiceImpl implements RoleService {
     public RoleList getAllRoles() {
         return RoleList.builder()
                 .roleDtos(roleMapper.rolesToRoleDtos(roleRepository.findAll()))
+                .build();
+    }
+
+    /**
+     * Get role by role id
+     * @param roleId
+     * @return
+     */
+    @Override
+    public RoleList getRoleById(UUID roleId) {
+        RoleDto roleDto = roleMapper.roleToRoleDto(roleRepository.findById(roleId).orElseThrow( () -> {
+            throw new RoleNotFoundException("Role with role id " + roleId + " not found" );
+        }));
+        return RoleList.builder()
+                .roleDtos(Arrays.asList(roleDto))
+                .build();
+    }
+
+    /**
+     * Get role by role name
+     * @param roleName
+     * @return
+     */
+    @Override
+    public RoleList getRoleByRoleName(String roleName) {
+        RoleDto roleDto = roleMapper.roleToRoleDto(roleRepository.findRoleByRoleName(roleName).orElseThrow( () -> {
+            throw new RoleNotFoundException("Role with role name " + roleName + " not found" );
+        }));
+        return RoleList.builder()
+                .roleDtos(Arrays.asList(roleDto))
                 .build();
     }
 

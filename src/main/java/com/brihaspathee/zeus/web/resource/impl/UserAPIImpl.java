@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.UUID;
 
 /**
@@ -42,7 +44,7 @@ public class UserAPIImpl implements UserAPI {
     public ResponseEntity<ZeusApiResponse<UserList>> getAllUsers() {
         UserList userList = userService.getAllUsers();
         ZeusApiResponse<UserList> apiResponse = ZeusApiResponse.<UserList>builder()
-                .timestamp(LocalDateTime.now())
+                //.timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(200)
                 .response(userList)
@@ -61,7 +63,7 @@ public class UserAPIImpl implements UserAPI {
     public ResponseEntity<ZeusApiResponse<UserList>> getUserById(UUID userId) {
         UserList userList = userService.getUserById(userId);
         ZeusApiResponse<UserList> apiResponse = ZeusApiResponse.<UserList>builder()
-                .timestamp(LocalDateTime.now())
+                //.timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(200)
                 .response(userList)
@@ -80,7 +82,7 @@ public class UserAPIImpl implements UserAPI {
     public ResponseEntity<ZeusApiResponse<UserList>> getUserByUsername(String username) {
         UserList userList = userService.getUserByUsername(username);
         ZeusApiResponse<UserList> apiResponse = ZeusApiResponse.<UserList>builder()
-                .timestamp(LocalDateTime.now())
+                //.timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(200)
                 .response(userList)
@@ -116,15 +118,16 @@ public class UserAPIImpl implements UserAPI {
      */
     @Override
     public ResponseEntity<ZeusApiResponse<UserDto>> updateUser(UUID userId, UserDto userDto) {
-        //userDto.setUserId(userId);
+        userDto.setUserId(userId);
         UserDto savedUser = userService.saveUser(userDto);
         ZeusApiResponse<UserDto> apiResponse = ZeusApiResponse.<UserDto>builder()
+                //.timestamp(LocalDateTime.now(ZoneId.systemDefault()))
                 .response(savedUser)
                 .developerMessage(ApiResponseConstants.SUCCESS_REASON)
                 .message(ApiResponseConstants.SUCCESS)
-                .statusCode(201)
-                .status(HttpStatus.CREATED)
+                .statusCode(200)
+                .status(HttpStatus.OK)
                 .build();
-        return new ResponseEntity<ZeusApiResponse<UserDto>>(apiResponse, HttpStatus.CREATED);
+        return new ResponseEntity<ZeusApiResponse<UserDto>>(apiResponse, HttpStatus.OK);
     }
 }

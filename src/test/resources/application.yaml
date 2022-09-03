@@ -18,6 +18,9 @@ spring:
         format_sql: true
   profiles:
     active: test
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
 logging:
   level:
     org:

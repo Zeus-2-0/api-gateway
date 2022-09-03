@@ -1,0 +1,1286 @@
+{
+  "testClassName": "RoleAPIImplTest",
+  "testMethods": [
+    {
+      "testMethodName": "testGetAllRoles",
+      "testData": [
+        {
+          "testData": {
+            "exceptionExpected": false,
+            "httpStatusCode": "200",
+            "loggedInUser": {
+              "username": "john",
+              "password": "password"
+            },
+            "expectedRoleList": {
+              "roleDtos": [
+                {
+                  "roleId": "100ad35e-04ee-4da5-952c-e840b7a8d1ea",
+                  "roleName": "ADMIN",
+                  "authorityDtos": [
+                    {
+                      "authorityId": "67cdcff0-f180-421a-bd5f-69cbc62f3cfe",
+                      "permission": "authority.create"
+                    },
+                    {
+                      "authorityId": "f06cc9be-0c37-4dac-8d36-941e7dd03e95",
+                      "permission": "authority.read"
+                    },
+                    {
+                      "authorityId": "1fba12c8-da0d-4d15-be62-5cdcc0d40240",
+                      "permission": "authority.update"
+                    },
+                    {
+                      "authorityId": "4a12573c-288f-4218-9a1f-8effcd2b8637",
+                      "permission": "authority.delete"
+                    },
+                    {
+                      "authorityId": "866d7126-8281-42c6-a02d-3087b0bb1cab",
+                      "permission": "role.create"
+                    },
+                    {
+                      "authorityId": "14e8773c-6649-4c21-9c3c-39a94017ee15",
+                      "permission": "role.read"
+                    },
+                    {
+                      "authorityId": "4cf0bfda-d703-4ce0-a3ab-298d5d0fd5be",
+                      "permission": "role.update"
+                    },
+                    {
+                      "authorityId": "baf01a6a-de78-4c2d-8ee8-28401cb5225b",
+                      "permission": "role.delete"
+                    },
+                    {
+                      "authorityId": "598ea376-0c17-474a-a0a7-cd26ce2c5754",
+                      "permission": "user.create"
+                    },
+                    {
+                      "authorityId": "9be33d52-605e-4d29-92e2-3209c1b8b79d",
+                      "permission": "user.read"
+                    },
+                    {
+                      "authorityId": "a0f3679a-ef3d-4175-a792-bc2376e11d08",
+                      "permission": "user.update"
+                    },
+                    {
+                      "authorityId": "dd14ff93-294a-469e-86e0-97289df45bb6",
+                      "permission": "user.delete"
+                    },
+                    {
+                      "authorityId": "b995d822-03ba-46a1-a6cf-1d75dd51e57b",
+                      "permission": "account.create"
+                    },
+                    {
+                      "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                      "permission": "account.read"
+                    },
+                    {
+                      "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                      "permission": "account.update"
+                    },
+                    {
+                      "authorityId": "e7ad0679-aace-4def-8898-26cd30147128",
+                      "permission": "account.delete"
+                    },
+                    {
+                      "authorityId": "62743bb2-c6c8-4194-ae68-cfb2d2414fc6",
+                      "permission": "transaction.create"
+                    },
+                    {
+                      "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                      "permission": "transaction.read"
+                    },
+                    {
+                      "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                      "permission": "transaction.update"
+                    },
+                    {
+                      "authorityId": "965386ba-7f77-4cf1-8a70-b5b5fd58f4d6",
+                      "permission": "transaction.delete"
+                    }
+                  ]
+                },
+                {
+                  "roleId": "0bbf5895-9084-4b8d-860c-c722d649ff66",
+                  "roleName": "ENROLLMENT_SPECIALIST",
+                  "authorityDtos": [
+                    {
+                      "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                      "permission": "account.read"
+                    },
+                    {
+                      "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                      "permission": "account.update"
+                    },
+                    {
+                      "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                      "permission": "transaction.read"
+                    },
+                    {
+                      "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                      "permission": "transaction.update"
+                    }
+                  ]
+                },
+                {
+                  "roleId": "fbf390fc-99b7-40ad-b368-20523dda8e12",
+                  "roleName": "ENROLLMENT_MANAGER",
+                  "authorityDtos": [
+                    {
+                      "authorityId": "b995d822-03ba-46a1-a6cf-1d75dd51e57b",
+                      "permission": "account.create"
+                    },
+                    {
+                      "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                      "permission": "account.read"
+                    },
+                    {
+                      "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                      "permission": "account.update"
+                    },
+                    {
+                      "authorityId": "e7ad0679-aace-4def-8898-26cd30147128",
+                      "permission": "account.delete"
+                    },
+                    {
+                      "authorityId": "62743bb2-c6c8-4194-ae68-cfb2d2414fc6",
+                      "permission": "transaction.create"
+                    },
+                    {
+                      "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                      "permission": "transaction.read"
+                    },
+                    {
+                      "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                      "permission": "transaction.update"
+                    },
+                    {
+                      "authorityId": "965386ba-7f77-4cf1-8a70-b5b5fd58f4d6",
+                      "permission": "transaction.delete"
+                    }
+                  ]
+                },
+                {
+                  "roleId": "9449e581-719d-41cf-abac-56a029d4dc97",
+                  "roleName": "SERVICE",
+                  "authorityDtos": [
+                    {
+                      "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                      "permission": "account.read"
+                    },
+                    {
+                      "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                      "permission": "account.update"
+                    },
+                    {
+                      "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                      "permission": "transaction.read"
+                    },
+                    {
+                      "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                      "permission": "transaction.update"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "403",
+            "authException": true,
+            "exceptionMessage": "403 FORBIDDEN",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "password"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "password"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "incorrect-password"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "incorrect-password"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testMethodName": "testCreateRole",
+      "testData": [
+        {
+          "testData": {
+            "exceptionExpected": false,
+            "httpStatusCode": "200",
+            "loggedInUser": {
+              "username": "john",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleName": "test-role",
+              "authorityDtos": [
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                }
+              ]
+            },
+            "expectedRoleDto": {
+              "roleName": "test-role",
+              "authorityDtos": [
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "403",
+            "authException": true,
+            "exceptionMessage": "403 FORBIDDEN",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleName": "test-role",
+              "authorityDtos": [
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                }
+              ]
+            },
+            "expectedRoleDto": {
+              "roleName": "test-role",
+              "authorityDtos": [
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleName": "test-role",
+              "authorityDtos": [
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                }
+              ]
+            },
+            "expectedRoleDto": {
+              "roleName": "test-role",
+              "authorityDtos": [
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "incorrect-password"
+            },
+            "roleDtoRequest": {
+              "roleName": "test-role",
+              "authorityDtos": [
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                }
+              ]
+            },
+            "expectedRoleDto": {
+              "roleName": "test-role",
+              "authorityDtos": [
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "incorrect-password"
+            },
+            "roleDtoRequest": {
+              "roleName": "test-role",
+              "authorityDtos": [
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                }
+              ]
+            },
+            "expectedRoleDto": {
+              "roleName": "test-role",
+              "authorityDtos": [
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testMethodName": "testUpdateRole",
+      "testData": [
+        {
+          "testData": {
+            "exceptionExpected": false,
+            "httpStatusCode": "201",
+            "loggedInUser": {
+              "username": "john",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleId": "fbf390fc-99b7-40ad-b368-20523dda8e12",
+              "roleName": "ENROLLMENT_MANAGER",
+              "authorityDtos": [
+                {
+                  "authorityId": "67cdcff0-f180-421a-bd5f-69cbc62f3cfe",
+                  "permission": "authority.create"
+                },
+                {
+                  "authorityId": "866d7126-8281-42c6-a02d-3087b0bb1cab",
+                  "permission": "role.create"
+                },
+                {
+                  "authorityId": "b995d822-03ba-46a1-a6cf-1d75dd51e57b",
+                  "permission": "account.create"
+                },
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "e7ad0679-aace-4def-8898-26cd30147128",
+                  "permission": "account.delete"
+                },
+                {
+                  "authorityId": "62743bb2-c6c8-4194-ae68-cfb2d2414fc6",
+                  "permission": "transaction.create"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                },
+                {
+                  "authorityId": "965386ba-7f77-4cf1-8a70-b5b5fd58f4d6",
+                  "permission": "transaction.delete"
+                }
+              ]
+            },
+            "expectedRoleList": {
+              "roleDtos": [
+                {
+                  "roleId": "fbf390fc-99b7-40ad-b368-20523dda8e12",
+                  "roleName": "ENROLLMENT_MANAGER",
+                  "authorityDtos": [
+                    {
+                      "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                      "permission": "account.read"
+                    },
+                    {
+                      "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                      "permission": "account.update"
+                    },
+                    {
+                      "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                      "permission": "transaction.read"
+                    },
+                    {
+                      "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                      "permission": "transaction.update"
+                    },
+                    {
+                      "authorityId": "b995d822-03ba-46a1-a6cf-1d75dd51e57b",
+                      "permission": "account.create"
+                    },
+                    {
+                      "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                      "permission": "account.read"
+                    },
+                    {
+                      "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                      "permission": "account.update"
+                    },
+                    {
+                      "authorityId": "e7ad0679-aace-4def-8898-26cd30147128",
+                      "permission": "account.delete"
+                    },
+                    {
+                      "authorityId": "62743bb2-c6c8-4194-ae68-cfb2d2414fc6",
+                      "permission": "transaction.create"
+                    },
+                    {
+                      "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                      "permission": "transaction.read"
+                    },
+                    {
+                      "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                      "permission": "transaction.update"
+                    },
+                    {
+                      "authorityId": "965386ba-7f77-4cf1-8a70-b5b5fd58f4d6",
+                      "permission": "transaction.delete"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "403",
+            "authException": true,
+            "exceptionMessage": "403 FORBIDDEN",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleId": "fbf390fc-99b7-40ad-b368-20523dda8e12",
+              "roleName": "ENROLLMENT_MANAGER",
+              "authorityDtos": [
+                {
+                  "authorityId": "67cdcff0-f180-421a-bd5f-69cbc62f3cfe",
+                  "permission": "authority.create"
+                },
+                {
+                  "authorityId": "866d7126-8281-42c6-a02d-3087b0bb1cab",
+                  "permission": "role.create"
+                },
+                {
+                  "authorityId": "b995d822-03ba-46a1-a6cf-1d75dd51e57b",
+                  "permission": "account.create"
+                },
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "e7ad0679-aace-4def-8898-26cd30147128",
+                  "permission": "account.delete"
+                },
+                {
+                  "authorityId": "62743bb2-c6c8-4194-ae68-cfb2d2414fc6",
+                  "permission": "transaction.create"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                },
+                {
+                  "authorityId": "965386ba-7f77-4cf1-8a70-b5b5fd58f4d6",
+                  "permission": "transaction.delete"
+                }
+              ]
+            },
+            "expectedRoleList": {
+              "users": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleId": "fbf390fc-99b7-40ad-b368-20523dda8e12",
+              "roleName": "ENROLLMENT_MANAGER",
+              "authorityDtos": [
+                {
+                  "authorityId": "67cdcff0-f180-421a-bd5f-69cbc62f3cfe",
+                  "permission": "authority.create"
+                },
+                {
+                  "authorityId": "866d7126-8281-42c6-a02d-3087b0bb1cab",
+                  "permission": "role.create"
+                },
+                {
+                  "authorityId": "b995d822-03ba-46a1-a6cf-1d75dd51e57b",
+                  "permission": "account.create"
+                },
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "e7ad0679-aace-4def-8898-26cd30147128",
+                  "permission": "account.delete"
+                },
+                {
+                  "authorityId": "62743bb2-c6c8-4194-ae68-cfb2d2414fc6",
+                  "permission": "transaction.create"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                },
+                {
+                  "authorityId": "965386ba-7f77-4cf1-8a70-b5b5fd58f4d6",
+                  "permission": "transaction.delete"
+                }
+              ]
+            },
+            "expectedRoleList": {
+              "users": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "incorrect-password"
+            },
+            "roleDtoRequest": {
+              "roleId": "fbf390fc-99b7-40ad-b368-20523dda8e12",
+              "roleName": "ENROLLMENT_MANAGER",
+              "authorityDtos": [
+                {
+                  "authorityId": "67cdcff0-f180-421a-bd5f-69cbc62f3cfe",
+                  "permission": "authority.create"
+                },
+                {
+                  "authorityId": "866d7126-8281-42c6-a02d-3087b0bb1cab",
+                  "permission": "role.create"
+                },
+                {
+                  "authorityId": "b995d822-03ba-46a1-a6cf-1d75dd51e57b",
+                  "permission": "account.create"
+                },
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "e7ad0679-aace-4def-8898-26cd30147128",
+                  "permission": "account.delete"
+                },
+                {
+                  "authorityId": "62743bb2-c6c8-4194-ae68-cfb2d2414fc6",
+                  "permission": "transaction.create"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                },
+                {
+                  "authorityId": "965386ba-7f77-4cf1-8a70-b5b5fd58f4d6",
+                  "permission": "transaction.delete"
+                }
+              ]
+            },
+            "expectedRoleList": {
+              "users": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "incorrect-password"
+            },
+            "roleDtoRequest": {
+              "roleId": "fbf390fc-99b7-40ad-b368-20523dda8e12",
+              "roleName": "ENROLLMENT_MANAGER",
+              "authorityDtos": [
+                {
+                  "authorityId": "67cdcff0-f180-421a-bd5f-69cbc62f3cfe",
+                  "permission": "authority.create"
+                },
+                {
+                  "authorityId": "866d7126-8281-42c6-a02d-3087b0bb1cab",
+                  "permission": "role.create"
+                },
+                {
+                  "authorityId": "b995d822-03ba-46a1-a6cf-1d75dd51e57b",
+                  "permission": "account.create"
+                },
+                {
+                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                  "permission": "account.read"
+                },
+                {
+                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                  "permission": "account.update"
+                },
+                {
+                  "authorityId": "e7ad0679-aace-4def-8898-26cd30147128",
+                  "permission": "account.delete"
+                },
+                {
+                  "authorityId": "62743bb2-c6c8-4194-ae68-cfb2d2414fc6",
+                  "permission": "transaction.create"
+                },
+                {
+                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                  "permission": "transaction.read"
+                },
+                {
+                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                  "permission": "transaction.update"
+                },
+                {
+                  "authorityId": "965386ba-7f77-4cf1-8a70-b5b5fd58f4d6",
+                  "permission": "transaction.delete"
+                }
+              ]
+            },
+            "expectedRoleList": {
+              "users": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testMethodName": "testGetRoleById",
+      "testData": [
+        {
+          "testData": {
+            "exceptionExpected": false,
+            "httpStatusCode": "200",
+            "loggedInUser": {
+              "username": "john",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleId": "100ad35e-04ee-4da5-952c-e840b7a8d1ea"
+            },
+            "expectedRoleList": {
+              "roleDtos": [
+                {
+                  "roleId": "100ad35e-04ee-4da5-952c-e840b7a8d1ea",
+                  "roleName": "ADMIN",
+                  "authorityDtos": [
+                    {
+                      "authorityId": "67cdcff0-f180-421a-bd5f-69cbc62f3cfe",
+                      "permission": "authority.create"
+                    },
+                    {
+                      "authorityId": "f06cc9be-0c37-4dac-8d36-941e7dd03e95",
+                      "permission": "authority.read"
+                    },
+                    {
+                      "authorityId": "1fba12c8-da0d-4d15-be62-5cdcc0d40240",
+                      "permission": "authority.update"
+                    },
+                    {
+                      "authorityId": "4a12573c-288f-4218-9a1f-8effcd2b8637",
+                      "permission": "authority.delete"
+                    },
+                    {
+                      "authorityId": "866d7126-8281-42c6-a02d-3087b0bb1cab",
+                      "permission": "role.create"
+                    },
+                    {
+                      "authorityId": "14e8773c-6649-4c21-9c3c-39a94017ee15",
+                      "permission": "role.read"
+                    },
+                    {
+                      "authorityId": "4cf0bfda-d703-4ce0-a3ab-298d5d0fd5be",
+                      "permission": "role.update"
+                    },
+                    {
+                      "authorityId": "baf01a6a-de78-4c2d-8ee8-28401cb5225b",
+                      "permission": "role.delete"
+                    },
+                    {
+                      "authorityId": "598ea376-0c17-474a-a0a7-cd26ce2c5754",
+                      "permission": "user.create"
+                    },
+                    {
+                      "authorityId": "9be33d52-605e-4d29-92e2-3209c1b8b79d",
+                      "permission": "user.read"
+                    },
+                    {
+                      "authorityId": "a0f3679a-ef3d-4175-a792-bc2376e11d08",
+                      "permission": "user.update"
+                    },
+                    {
+                      "authorityId": "dd14ff93-294a-469e-86e0-97289df45bb6",
+                      "permission": "user.delete"
+                    },
+                    {
+                      "authorityId": "b995d822-03ba-46a1-a6cf-1d75dd51e57b",
+                      "permission": "account.create"
+                    },
+                    {
+                      "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                      "permission": "account.read"
+                    },
+                    {
+                      "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                      "permission": "account.update"
+                    },
+                    {
+                      "authorityId": "e7ad0679-aace-4def-8898-26cd30147128",
+                      "permission": "account.delete"
+                    },
+                    {
+                      "authorityId": "62743bb2-c6c8-4194-ae68-cfb2d2414fc6",
+                      "permission": "transaction.create"
+                    },
+                    {
+                      "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                      "permission": "transaction.read"
+                    },
+                    {
+                      "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                      "permission": "transaction.update"
+                    },
+                    {
+                      "authorityId": "965386ba-7f77-4cf1-8a70-b5b5fd58f4d6",
+                      "permission": "transaction.delete"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "403",
+            "authException": true,
+            "exceptionMessage": "403 FORBIDDEN",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleId": "100ad35e-04ee-4da5-952c-e840b7a8d1ea"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleId": "100ad35e-04ee-4da5-952c-e840b7a8d1ea"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "incorrect-password"
+            },
+            "roleDtoRequest": {
+              "roleId": "100ad35e-04ee-4da5-952c-e840b7a8d1ea"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "incorrect-password"
+            },
+            "roleDtoRequest": {
+              "roleId": "100ad35e-04ee-4da5-952c-e840b7a8d1ea"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "400",
+            "exceptionCode": "100005",
+            "authException": false,
+            "exceptionMessage": "Role with role id 3375d2ab-5b0f-4da2-a26b-abf7354086f4 not found",
+            "loggedInUser": {
+              "username": "john",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleId": "3375d2ab-5b0f-4da2-a26b-abf7354086f4"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testMethodName": "testGetRoleByRoleName",
+      "testData": [
+        {
+          "testData": {
+            "exceptionExpected": false,
+            "httpStatusCode": "200",
+            "loggedInUser": {
+              "username": "john",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleName": "ADMIN"
+            },
+            "expectedRoleList": {
+              "roleDtos": [
+                {
+                  "roleId": "100ad35e-04ee-4da5-952c-e840b7a8d1ea",
+                  "roleName": "ADMIN",
+                  "authorityDtos": [
+                    {
+                      "authorityId": "67cdcff0-f180-421a-bd5f-69cbc62f3cfe",
+                      "permission": "authority.create"
+                    },
+                    {
+                      "authorityId": "f06cc9be-0c37-4dac-8d36-941e7dd03e95",
+                      "permission": "authority.read"
+                    },
+                    {
+                      "authorityId": "1fba12c8-da0d-4d15-be62-5cdcc0d40240",
+                      "permission": "authority.update"
+                    },
+                    {
+                      "authorityId": "4a12573c-288f-4218-9a1f-8effcd2b8637",
+                      "permission": "authority.delete"
+                    },
+                    {
+                      "authorityId": "866d7126-8281-42c6-a02d-3087b0bb1cab",
+                      "permission": "role.create"
+                    },
+                    {
+                      "authorityId": "14e8773c-6649-4c21-9c3c-39a94017ee15",
+                      "permission": "role.read"
+                    },
+                    {
+                      "authorityId": "4cf0bfda-d703-4ce0-a3ab-298d5d0fd5be",
+                      "permission": "role.update"
+                    },
+                    {
+                      "authorityId": "baf01a6a-de78-4c2d-8ee8-28401cb5225b",
+                      "permission": "role.delete"
+                    },
+                    {
+                      "authorityId": "598ea376-0c17-474a-a0a7-cd26ce2c5754",
+                      "permission": "user.create"
+                    },
+                    {
+                      "authorityId": "9be33d52-605e-4d29-92e2-3209c1b8b79d",
+                      "permission": "user.read"
+                    },
+                    {
+                      "authorityId": "a0f3679a-ef3d-4175-a792-bc2376e11d08",
+                      "permission": "user.update"
+                    },
+                    {
+                      "authorityId": "dd14ff93-294a-469e-86e0-97289df45bb6",
+                      "permission": "user.delete"
+                    },
+                    {
+                      "authorityId": "b995d822-03ba-46a1-a6cf-1d75dd51e57b",
+                      "permission": "account.create"
+                    },
+                    {
+                      "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
+                      "permission": "account.read"
+                    },
+                    {
+                      "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
+                      "permission": "account.update"
+                    },
+                    {
+                      "authorityId": "e7ad0679-aace-4def-8898-26cd30147128",
+                      "permission": "account.delete"
+                    },
+                    {
+                      "authorityId": "62743bb2-c6c8-4194-ae68-cfb2d2414fc6",
+                      "permission": "transaction.create"
+                    },
+                    {
+                      "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
+                      "permission": "transaction.read"
+                    },
+                    {
+                      "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
+                      "permission": "transaction.update"
+                    },
+                    {
+                      "authorityId": "965386ba-7f77-4cf1-8a70-b5b5fd58f4d6",
+                      "permission": "transaction.delete"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "403",
+            "authException": true,
+            "exceptionMessage": "403 FORBIDDEN",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleName": "admin"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleName": "admin"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "mary",
+              "password": "incorrect-password"
+            },
+            "roleDtoRequest": {
+              "roleName": "admin"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "401",
+            "authException": true,
+            "exceptionMessage": "401 UNAUTHORIZED",
+            "loggedInUser": {
+              "username": "incorrect-username",
+              "password": "incorrect-password"
+            },
+            "roleDtoRequest": {
+              "roleName": "admin"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        },
+        {
+          "testData": {
+            "exceptionExpected": true,
+            "httpStatusCode": "400",
+            "exceptionCode": "100005",
+            "authException": false,
+            "exceptionMessage": "Role with role name admin1 not found",
+            "loggedInUser": {
+              "username": "john",
+              "password": "password"
+            },
+            "roleDtoRequest": {
+              "roleName": "admin1"
+            },
+            "expectedRoleList": {
+              "roleDtos": []
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
