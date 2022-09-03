@@ -3,6 +3,8 @@ package com.brihaspathee.zeus.service.interfaces;
 import com.brihaspathee.zeus.security.model.RoleDto;
 import com.brihaspathee.zeus.security.model.RoleList;
 
+import java.util.UUID;
+
 /**
  * Created in Intellij IDEA
  * User: Balaji Varadharajan
@@ -19,6 +21,20 @@ public interface RoleService {
      * @return
      */
     RoleList getAllRoles();
+
+    /**
+     * Get role by role id
+     * @param roleId
+     * @return
+     */
+    RoleList getRoleById(UUID roleId);
+
+    /**
+     * Get role by role name
+     * @param roleName
+     * @return
+     */
+    RoleList getRoleByRoleName(String roleName);
 
     /**
      * Save the role

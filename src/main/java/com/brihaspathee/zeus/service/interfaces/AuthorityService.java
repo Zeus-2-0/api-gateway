@@ -3,6 +3,8 @@ package com.brihaspathee.zeus.service.interfaces;
 import com.brihaspathee.zeus.security.model.AuthorityDto;
 import com.brihaspathee.zeus.security.model.AuthorityList;
 
+import java.util.UUID;
+
 /**
  * Created in Intellij IDEA
  * User: Balaji Varadharajan
@@ -21,9 +23,23 @@ public interface AuthorityService {
     AuthorityList getAllAuthorities();
 
     /**
+     * Get permission by authority id
+     * @param authorityId
+     * @return
+     */
+    AuthorityList getAuthorityById(UUID authorityId);
+
+    /**
+     * Get permission by authority name
+     * @param permission
+     * @return
+     */
+    AuthorityList getAuthorityByName(String permission);
+
+    /**
      * Create a new permission
      * @param authorityDto
      * @return
      */
-    AuthorityDto createAuthority(AuthorityDto authorityDto);
+    AuthorityDto saveAuthority(AuthorityDto authorityDto);
 }

@@ -49,41 +49,11 @@ public class ApiErrorHandler {
         errors.add(apiException);
         ApiExceptionList exceptionList = ApiExceptionList.builder().exceptions(errors).build();
         ZeusApiResponse<ApiExceptionList> apiResponse = ZeusApiResponse.<ApiExceptionList>builder()
-                .timestamp(LocalDateTime.now())
+                //.timestamp(LocalDateTime.now())
                 .response(exceptionList)
                 .status(HttpStatus.UNAUTHORIZED)
                 .statusCode(401)
                 .reason(ApiResponseConstants.INVALID_PASSWORD)
-                .message(ApiResponseConstants.FAIL)
-                .developerMessage(ApiResponseConstants.FAILURE_REASON)
-                .build();
-        return new ResponseEntity<>(apiResponse,HttpStatus.UNAUTHORIZED);
-    }
-
-
-    /**
-     * Handles user not found exception
-     * This exception is generated when the username is not found
-     * @param exception
-     * @return
-     * @throws JsonProcessingException
-     */
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ZeusApiResponse<ApiExceptionList>> handleBadCredentialsException(UserNotFoundException exception) throws JsonProcessingException {
-        log.info("Inside User not found exception");
-        List<ApiException> errors = new ArrayList<>();
-        ApiException apiException = ApiException.builder()
-                .exceptionCode("100002")
-                .exceptionMessage(exception.getMessage())
-                .build();
-        errors.add(apiException);
-        ApiExceptionList exceptionList = ApiExceptionList.builder().exceptions(errors).build();
-        ZeusApiResponse<ApiExceptionList> apiResponse = ZeusApiResponse.<ApiExceptionList>builder()
-                .timestamp(LocalDateTime.now())
-                .response(exceptionList)
-                .status(HttpStatus.UNAUTHORIZED)
-                .statusCode(401)
-                .reason(ApiResponseConstants.INVALID_USERNAME)
                 .message(ApiResponseConstants.FAIL)
                 .developerMessage(ApiResponseConstants.FAILURE_REASON)
                 .build();
@@ -109,7 +79,7 @@ public class ApiErrorHandler {
         errors.add(apiException);
         ApiExceptionList exceptionList = ApiExceptionList.builder().exceptions(errors).build();
         ZeusApiResponse<ApiExceptionList> apiResponse = ZeusApiResponse.<ApiExceptionList>builder()
-                .timestamp(LocalDateTime.now())
+                //.timestamp(LocalDateTime.now())
                 .response(exceptionList)
                 .status(HttpStatus.FORBIDDEN)
                 .statusCode(403)
@@ -131,7 +101,7 @@ public class ApiErrorHandler {
         log.info("Inside http client error exception: {}", exception.getRawStatusCode());
         if(exception.getRawStatusCode() == 401){
             ZeusApiResponse apiResponse = ZeusApiResponse.builder()
-                    .timestamp(LocalDateTime.now())
+                    //.timestamp(LocalDateTime.now())
                     .message("UNAUTHORIZED")
                     .status(HttpStatus.UNAUTHORIZED)
                     .statusCode(401)
@@ -143,7 +113,7 @@ public class ApiErrorHandler {
             return new ResponseEntity<>(apiResponse, HttpStatus.UNAUTHORIZED);
         }else {
             ZeusApiResponse apiResponse = ZeusApiResponse.builder()
-                    .timestamp(LocalDateTime.now())
+                    //.timestamp(LocalDateTime.now())
                     .message("Unknown exception occured")
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .statusCode(500)

@@ -54,6 +54,44 @@ public class RoleAPIImpl implements RoleAPI {
     }
 
     /**
+     * Get role by role id
+     * @param roleId
+     * @return
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<RoleList>> getRoleById(UUID roleId) {
+        RoleList roleList = roleService.getRoleById(roleId);
+        ZeusApiResponse<RoleList> apiResponse = ZeusApiResponse.<RoleList>builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(200)
+                .response(roleList)
+                .message(ApiResponseConstants.SUCCESS)
+                .developerMessage(ApiResponseConstants.SUCCESS_REASON)
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    /**
+     * Get role by role name
+     * @param roleName
+     * @return
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<RoleList>> getRoleByRoleName(String roleName) {
+        RoleList roleList = roleService.getRoleByRoleName(roleName);
+        ZeusApiResponse<RoleList> apiResponse = ZeusApiResponse.<RoleList>builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(200)
+                .response(roleList)
+                .message(ApiResponseConstants.SUCCESS)
+                .developerMessage(ApiResponseConstants.SUCCESS_REASON)
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    /**
      * Create a new role
      * @param roleDto
      * @return

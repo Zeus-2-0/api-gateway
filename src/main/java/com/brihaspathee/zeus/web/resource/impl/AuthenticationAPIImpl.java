@@ -81,7 +81,7 @@ public class AuthenticationAPIImpl implements AuthenticationAPI {
      */
     private ResponseEntity<ZeusApiResponse<AuthenticationResponse>> getAuthenticatedResponse(AuthenticationResponse authenticationResponse){
         ZeusApiResponse<AuthenticationResponse> apiResponse = ZeusApiResponse.<AuthenticationResponse>builder()
-                .timestamp(LocalDateTime.now())
+                //.timestamp(LocalDateTime.now())
                 .response(authenticationResponse)
                 .status(HttpStatus.OK)
                 .statusCode(200)
