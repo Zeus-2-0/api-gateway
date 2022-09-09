@@ -5,12 +5,14 @@ import com.brihaspathee.zeus.web.model.TradingPartnerDto;
 import com.brihaspathee.zeus.web.model.TradingPartnerList;
 import com.brihaspathee.zeus.web.resource.interfaces.TradingPartnerAPI;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -68,5 +70,24 @@ public class TradingPartnerAPIImpl implements TradingPartnerAPI {
                 .message("Successfully Retrieved Trading Partners")
                 .build();
         return ResponseEntity.ok(apiResponse);
+    }
+
+    /**
+     * Create a new trading partner
+     * @param tradingPartnerDto
+     * @return
+     * @throws JsonProcessingException
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<TradingPartnerDto>> createTradingPartner(TradingPartnerDto tradingPartnerDto) throws JsonProcessingException {
+        TradingPartnerDto savedTradingPartner = tradingPartnerService.createTradingPartner(tradingPartnerDto);
+        ZeusApiResponse<TradingPartnerDto> apiResponse = ZeusApiResponse.<TradingPartnerDto>builder()
+                .response(savedTradingPartner)
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CREATED)
+                .statusCode(201)
+                .message("Successfully Created the trading partner")
+                .build();
+        return new ResponseEntity<ZeusApiResponse<TradingPartnerDto>>(apiResponse, HttpStatus.CREATED);
     }
 }

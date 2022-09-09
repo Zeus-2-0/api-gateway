@@ -36,7 +36,7 @@ import java.util.Map;
 public interface AccountAPI {
 
     /**
-     * Get the account related to the account id that is passed in as input
+     * Get the account that is related to the account id that is passed in as input
      * @return List AccountDto
      */
     @Operation(
