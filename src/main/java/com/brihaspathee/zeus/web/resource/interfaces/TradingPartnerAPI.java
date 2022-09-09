@@ -1,11 +1,13 @@
 package com.brihaspathee.zeus.web.resource.interfaces;
 
 import com.brihaspathee.zeus.permissions.AccountReadPermission;
+import com.brihaspathee.zeus.permissions.TradingPartnerCreatePermission;
 import com.brihaspathee.zeus.permissions.TradingPartnerReadPermission;
 import com.brihaspathee.zeus.web.model.AccountDto;
 import com.brihaspathee.zeus.web.model.TradingPartnerDto;
 import com.brihaspathee.zeus.web.model.TradingPartnerList;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -111,4 +113,31 @@ public interface TradingPartnerAPI {
     @TradingPartnerReadPermission
     @GetMapping("/search")
     ResponseEntity<ZeusApiResponse<TradingPartnerList>> getTradingPartnerByParameter(@RequestParam Map<String, String> searchParams);
+
+
+    /**
+     * Create a new Trading Partner
+     * @param tradingPartnerDto
+     * @return
+     * @throws JsonProcessingException
+     */
+    @Operation(
+            method = "POST",
+            description = "Create a new trading partner",
+            tags = {"trading-partner"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Successfully created the trading partner",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = TradingPartnerDto.class))
+                            }
+                    )
+            }
+    )
+    @TradingPartnerCreatePermission
+    @PostMapping
+    ResponseEntity<ZeusApiResponse<TradingPartnerDto>> createTradingPartner(@RequestBody TradingPartnerDto tradingPartnerDto) throws JsonProcessingException;
 }
