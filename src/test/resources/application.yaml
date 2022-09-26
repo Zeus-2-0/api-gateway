@@ -2,6 +2,7 @@ url:
   host:
     ref-data: http://localhost:8080/api/v1/
     trading-partner: http://localhost:8081/api/v1/
+    member-mgmt: http://localhost:8084/api/v1/
 spring:
   h2:
     console:
