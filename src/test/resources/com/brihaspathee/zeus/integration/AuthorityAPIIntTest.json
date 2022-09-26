@@ -181,24 +181,6 @@
         {
           "testData": {
             "exceptionExpected": true,
-            "httpStatusCode": "403",
-            "authException": true,
-            "exceptionMessage": "403 FORBIDDEN",
-            "loggedInUser": {
-              "username": "mary",
-              "password": "password"
-            },
-            "authorityDtoRequest": {
-              "permission": "test.create"
-            },
-            "expectedAuthorityDto": {
-              "permission": "test.create"
-            }
-          }
-        },
-        {
-          "testData": {
-            "exceptionExpected": true,
             "httpStatusCode": "401",
             "authException": true,
             "exceptionMessage": "401 UNAUTHORIZED",

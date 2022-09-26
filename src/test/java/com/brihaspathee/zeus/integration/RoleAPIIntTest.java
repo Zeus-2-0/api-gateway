@@ -144,7 +144,7 @@ public class RoleAPIIntTest {
      * This method will test the create role end point
      * @param repetitionInfo
      */
-    @RepeatedTest(5)
+    @RepeatedTest(4)
     void testCreateRole(RepetitionInfo repetitionInfo){
         log.info("Current Repetition:{}", repetitionInfo.getCurrentRepetition());
 
