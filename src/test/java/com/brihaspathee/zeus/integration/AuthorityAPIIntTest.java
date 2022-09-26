@@ -152,7 +152,7 @@ public class AuthorityAPIIntTest {
      * This method tests the create Authority api end point
      * @param repetitionInfo
      */
-    @RepeatedTest(5)
+    @RepeatedTest(4)
     @Order(4)
     void testCreateAuthority(RepetitionInfo repetitionInfo){
         log.info("Current Repetition:{}", repetitionInfo.getCurrentRepetition());

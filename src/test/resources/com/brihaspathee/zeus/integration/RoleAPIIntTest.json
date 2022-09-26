@@ -306,60 +306,6 @@
         {
           "testData": {
             "exceptionExpected": true,
-            "httpStatusCode": "403",
-            "authException": true,
-            "exceptionMessage": "403 FORBIDDEN",
-            "loggedInUser": {
-              "username": "mary",
-              "password": "password"
-            },
-            "roleDtoRequest": {
-              "roleName": "test-role",
-              "authorityDtos": [
-                {
-                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
-                  "permission": "account.read"
-                },
-                {
-                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
-                  "permission": "account.update"
-                },
-                {
-                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
-                  "permission": "transaction.read"
-                },
-                {
-                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
-                  "permission": "transaction.update"
-                }
-              ]
-            },
-            "expectedRoleDto": {
-              "roleName": "test-role",
-              "authorityDtos": [
-                {
-                  "authorityId": "21c69c34-3939-41af-9797-33962a701f00",
-                  "permission": "account.read"
-                },
-                {
-                  "authorityId": "2bb12b6c-e399-4b54-85a4-383048399ce2",
-                  "permission": "account.update"
-                },
-                {
-                  "authorityId": "78ff18a5-4411-4f09-91ca-f16469fdf075",
-                  "permission": "transaction.read"
-                },
-                {
-                  "authorityId": "c8ae9d23-6e40-4604-acd5-7b350feeebd0",
-                  "permission": "transaction.update"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "testData": {
-            "exceptionExpected": true,
             "httpStatusCode": "401",
             "authException": true,
             "exceptionMessage": "401 UNAUTHORIZED",
