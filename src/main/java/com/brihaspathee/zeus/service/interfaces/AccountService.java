@@ -2,9 +2,6 @@ package com.brihaspathee.zeus.service.interfaces;
 
 import com.brihaspathee.zeus.web.model.AccountDto;
 import com.brihaspathee.zeus.web.model.AccountList;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +17,23 @@ import java.util.Map;
  */
 public interface AccountService {
 
-    List<AccountDto> getAllAccounts();
+    /**
+     * Get all the accounts in the system
+     * @return
+     */
+    AccountList getAllAccounts();
+
+    /**
+     * Get all the accounts using the search parameters
+     * @param searchParams
+     * @return
+     */
     AccountList getAccountsByParams(Map<String, String> searchParams);
+
+    /**
+     * Get account by account number
+     * @param accountNumber
+     * @return
+     */
+    AccountList getAccountByAccountNumber(String accountNumber);
 }

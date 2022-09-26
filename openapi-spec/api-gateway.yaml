@@ -33,6 +33,12 @@ paths:
               $ref: '#/components/schemas/UserDto'
         required: true
       responses:
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
         "201":
           description: Successfully updated the user
           content:
@@ -41,12 +47,6 @@ paths:
                 $ref: '#/components/schemas/UserDto'
         "409":
           description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
-        "400":
-          description: Bad Request
           content:
             application/json:
               schema:
@@ -71,24 +71,62 @@ paths:
               $ref: '#/components/schemas/RoleDto'
         required: true
       responses:
-        "201":
-          description: Successfully created the role
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RoleDto'
-        "409":
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "204":
+          description: Successfully update the role
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponseRoleDto'
+  /api/v1/zeus/security/authority/{authorityId}:
+    put:
+      tags:
+      - security
+      description: Update an existing authority in the system
+      operationId: Update an existing authority id
+      parameters:
+      - name: authorityId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorityDto'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "204":
+          description: Successfully update the authority
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponseAuthorityDto'
   /zeus/jwt/authenticate:
     post:
       tags:
@@ -108,18 +146,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationResponse'
-        "201":
-          description: Successfully created the trading partner
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationResponse'
         "409":
           description: Conflict
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationResponse'
+        "201":
+          description: Successfully created the trading partner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationResponse'
+  /api/v1/zeus/tp:
+    get:
+      tags:
+      - trading-partner
+      description: Get all the trading partners
+      operationId: getAllTradingPartners
+      responses:
+        "200":
+          description: Successfully retrieved all the trading partners
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartnerList'
+    post:
+      tags:
+      - trading-partner
+      description: Create a new trading partner
+      operationId: createTradingPartner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TradingPartnerDto'
+        required: true
+      responses:
+        "201":
+          description: Successfully created the trading partner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartnerDto'
   /api/v1/zeus/security/user:
     get:
       tags:
@@ -145,24 +214,24 @@ paths:
               $ref: '#/components/schemas/UserDto'
         required: true
       responses:
-        "201":
-          description: Successfully created the user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
-        "409":
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "201":
+          description: Successfully created the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
   /api/v1/zeus/security/role:
     get:
       tags:
@@ -188,24 +257,24 @@ paths:
               $ref: '#/components/schemas/RoleDto'
         required: true
       responses:
-        "201":
-          description: Successfully created the role
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RoleDto'
-        "409":
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "201":
+          description: Successfully created the role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleDto'
   /api/v1/zeus/security/authority:
     get:
       tags:
@@ -231,6 +300,12 @@ paths:
               $ref: '#/components/schemas/AuthorityDto'
         required: true
       responses:
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
         "409":
           description: Conflict
           content:
@@ -243,12 +318,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthorityDto'
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
   /api/v1/zeus/ref-data/internal/list-types:
     get:
       tags:
@@ -330,19 +399,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WelcomeDto'
-  /api/v1/zeus/tp:
-    get:
-      tags:
-      - trading-partner
-      description: Get all the trading partners
-      operationId: getAllTradingPartners
-      responses:
-        "200":
-          description: Successfully retrieved all the trading partners
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TradingPartnerList'
   /api/v1/zeus/tp/{tradingPartnerId}:
     get:
       tags:
@@ -428,6 +484,84 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ZeusApiResponse'
+  /api/v1/zeus/security/role/role-name/{roleName}:
+    get:
+      tags:
+      - security
+      description: Get the role by role name
+      operationId: getRoleByRoleName
+      parameters:
+      - name: roleName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved the respective role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
+  /api/v1/zeus/security/role/role-id/{roleId}:
+    get:
+      tags:
+      - security
+      description: Get the role by role id
+      operationId: getRoleById
+      parameters:
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Successfully retrieved the respective role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
+  /api/v1/zeus/security/authority/authority-name/{permission}:
+    get:
+      tags:
+      - security
+      description: Get permission for a specific authority by permission name
+      operationId: Get Authority by permission name
+      parameters:
+      - name: permission
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved the permission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
+  /api/v1/zeus/security/authority/authority-id/{authorityId}:
+    get:
+      tags:
+      - security
+      description: Get permission for a specific authority by id
+      operationId: Get Authority by authority id
+      parameters:
+      - name: authorityId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Successfully retrieved the permission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
   /api/v1/zeus/ref-data/internal/list-types/{listTypeName}:
     get:
       tags:
@@ -456,6 +590,25 @@ paths:
       responses:
         "200":
           description: Successfully retrieved all the accounts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponse'
+  /api/v1/zeus/account/{accountNumber}:
+    get:
+      tags:
+      - accounts
+      description: Get account by account number
+      operationId: getAccountByAccountNumber
+      parameters:
+      - name: accountNumber
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved the account by account number
           content:
             application/json:
               schema:
@@ -532,6 +685,182 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiException'
+    ZeusApiResponseRoleDto:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        statusCode:
+          type: integer
+          format: int32
+        status:
+          type: string
+          enum:
+          - 100 CONTINUE
+          - 101 SWITCHING_PROTOCOLS
+          - 102 PROCESSING
+          - 103 CHECKPOINT
+          - 200 OK
+          - 201 CREATED
+          - 202 ACCEPTED
+          - 203 NON_AUTHORITATIVE_INFORMATION
+          - 204 NO_CONTENT
+          - 205 RESET_CONTENT
+          - 206 PARTIAL_CONTENT
+          - 207 MULTI_STATUS
+          - 208 ALREADY_REPORTED
+          - 226 IM_USED
+          - 300 MULTIPLE_CHOICES
+          - 301 MOVED_PERMANENTLY
+          - 302 FOUND
+          - 302 MOVED_TEMPORARILY
+          - 303 SEE_OTHER
+          - 304 NOT_MODIFIED
+          - 305 USE_PROXY
+          - 307 TEMPORARY_REDIRECT
+          - 308 PERMANENT_REDIRECT
+          - 400 BAD_REQUEST
+          - 401 UNAUTHORIZED
+          - 402 PAYMENT_REQUIRED
+          - 403 FORBIDDEN
+          - 404 NOT_FOUND
+          - 405 METHOD_NOT_ALLOWED
+          - 406 NOT_ACCEPTABLE
+          - 407 PROXY_AUTHENTICATION_REQUIRED
+          - 408 REQUEST_TIMEOUT
+          - 409 CONFLICT
+          - 410 GONE
+          - 411 LENGTH_REQUIRED
+          - 412 PRECONDITION_FAILED
+          - 413 PAYLOAD_TOO_LARGE
+          - 413 REQUEST_ENTITY_TOO_LARGE
+          - 414 URI_TOO_LONG
+          - 414 REQUEST_URI_TOO_LONG
+          - 415 UNSUPPORTED_MEDIA_TYPE
+          - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+          - 417 EXPECTATION_FAILED
+          - 418 I_AM_A_TEAPOT
+          - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+          - 420 METHOD_FAILURE
+          - 421 DESTINATION_LOCKED
+          - 422 UNPROCESSABLE_ENTITY
+          - 423 LOCKED
+          - 424 FAILED_DEPENDENCY
+          - 425 TOO_EARLY
+          - 426 UPGRADE_REQUIRED
+          - 428 PRECONDITION_REQUIRED
+          - 429 TOO_MANY_REQUESTS
+          - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+          - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+          - 500 INTERNAL_SERVER_ERROR
+          - 501 NOT_IMPLEMENTED
+          - 502 BAD_GATEWAY
+          - 503 SERVICE_UNAVAILABLE
+          - 504 GATEWAY_TIMEOUT
+          - 505 HTTP_VERSION_NOT_SUPPORTED
+          - 506 VARIANT_ALSO_NEGOTIATES
+          - 507 INSUFFICIENT_STORAGE
+          - 508 LOOP_DETECTED
+          - 509 BANDWIDTH_LIMIT_EXCEEDED
+          - 510 NOT_EXTENDED
+          - 511 NETWORK_AUTHENTICATION_REQUIRED
+        reason:
+          type: string
+        message:
+          type: string
+        developerMessage:
+          type: string
+        response:
+          $ref: '#/components/schemas/RoleDto'
+    ZeusApiResponseAuthorityDto:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        statusCode:
+          type: integer
+          format: int32
+        status:
+          type: string
+          enum:
+          - 100 CONTINUE
+          - 101 SWITCHING_PROTOCOLS
+          - 102 PROCESSING
+          - 103 CHECKPOINT
+          - 200 OK
+          - 201 CREATED
+          - 202 ACCEPTED
+          - 203 NON_AUTHORITATIVE_INFORMATION
+          - 204 NO_CONTENT
+          - 205 RESET_CONTENT
+          - 206 PARTIAL_CONTENT
+          - 207 MULTI_STATUS
+          - 208 ALREADY_REPORTED
+          - 226 IM_USED
+          - 300 MULTIPLE_CHOICES
+          - 301 MOVED_PERMANENTLY
+          - 302 FOUND
+          - 302 MOVED_TEMPORARILY
+          - 303 SEE_OTHER
+          - 304 NOT_MODIFIED
+          - 305 USE_PROXY
+          - 307 TEMPORARY_REDIRECT
+          - 308 PERMANENT_REDIRECT
+          - 400 BAD_REQUEST
+          - 401 UNAUTHORIZED
+          - 402 PAYMENT_REQUIRED
+          - 403 FORBIDDEN
+          - 404 NOT_FOUND
+          - 405 METHOD_NOT_ALLOWED
+          - 406 NOT_ACCEPTABLE
+          - 407 PROXY_AUTHENTICATION_REQUIRED
+          - 408 REQUEST_TIMEOUT
+          - 409 CONFLICT
+          - 410 GONE
+          - 411 LENGTH_REQUIRED
+          - 412 PRECONDITION_FAILED
+          - 413 PAYLOAD_TOO_LARGE
+          - 413 REQUEST_ENTITY_TOO_LARGE
+          - 414 URI_TOO_LONG
+          - 414 REQUEST_URI_TOO_LONG
+          - 415 UNSUPPORTED_MEDIA_TYPE
+          - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+          - 417 EXPECTATION_FAILED
+          - 418 I_AM_A_TEAPOT
+          - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+          - 420 METHOD_FAILURE
+          - 421 DESTINATION_LOCKED
+          - 422 UNPROCESSABLE_ENTITY
+          - 423 LOCKED
+          - 424 FAILED_DEPENDENCY
+          - 425 TOO_EARLY
+          - 426 UPGRADE_REQUIRED
+          - 428 PRECONDITION_REQUIRED
+          - 429 TOO_MANY_REQUESTS
+          - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+          - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+          - 500 INTERNAL_SERVER_ERROR
+          - 501 NOT_IMPLEMENTED
+          - 502 BAD_GATEWAY
+          - 503 SERVICE_UNAVAILABLE
+          - 504 GATEWAY_TIMEOUT
+          - 505 HTTP_VERSION_NOT_SUPPORTED
+          - 506 VARIANT_ALSO_NEGOTIATES
+          - 507 INSUFFICIENT_STORAGE
+          - 508 LOOP_DETECTED
+          - 509 BANDWIDTH_LIMIT_EXCEEDED
+          - 510 NOT_EXTENDED
+          - 511 NETWORK_AUTHENTICATION_REQUIRED
+        reason:
+          type: string
+        message:
+          type: string
+        developerMessage:
+          type: string
+        response:
+          $ref: '#/components/schemas/AuthorityDto'
     AuthenticationRequest:
       type: object
       properties:
@@ -553,6 +882,70 @@ components:
           $ref: '#/components/schemas/UserDto'
         authenticated:
           type: boolean
+    TradingPartnerDto:
+      required:
+      - lineOfBusinessTypeCode
+      - marketplaceTypeCode
+      - name
+      - receiverId
+      - senderId
+      - stateTypeCode
+      - tradingPartnerId
+      type: object
+      properties:
+        tradingPartnerSK:
+          type: string
+          description: Trading Partner SK - This is a UUID value
+          format: uuid
+          readOnly: true
+          example: 657cfd75-634e-49f1-9556-4d79f79848ec
+        tradingPartnerId:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Trading Partner ID
+          example: 683234GHD42
+        name:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Trading Partner Name
+          example: FL FFM
+        description:
+          type: string
+          description: A short description of the trading partner
+          example: FL State FFM TP
+        senderId:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Sender Id configured for the TP
+          example: CMSFFM
+        receiverId:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Receiver Id configured for the TP
+          example: "96633"
+        lineOfBusinessTypeCode:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: LOB associated with the trading partner
+          example: HIX
+        marketplaceTypeCode:
+          maxLength: 10
+          minLength: 2
+          type: string
+          description: Marketplace Type Code of the trading partner
+          example: FFM
+        stateTypeCode:
+          maxLength: 2
+          minLength: 2
+          type: string
+          description: State of the trading partner
+          example: FL
+      description: Trading Partner Object
     InternalListTypeDto:
       required:
       - displayName
@@ -787,70 +1180,6 @@ components:
       properties:
         username:
           type: string
-    TradingPartnerDto:
-      required:
-      - lineOfBusinessTypeCode
-      - marketplaceTypeCode
-      - name
-      - receiverId
-      - senderId
-      - stateTypeCode
-      - tradingPartnerId
-      type: object
-      properties:
-        tradingPartnerSK:
-          type: string
-          description: Trading Partner SK - This is a UUID value
-          format: uuid
-          readOnly: true
-          example: 657cfd75-634e-49f1-9556-4d79f79848ec
-        tradingPartnerId:
-          maxLength: 100
-          minLength: 2
-          type: string
-          description: Trading Partner ID
-          example: 683234GHD42
-        name:
-          maxLength: 100
-          minLength: 2
-          type: string
-          description: Trading Partner Name
-          example: FL FFM
-        description:
-          type: string
-          description: A short description of the trading partner
-          example: FL State FFM TP
-        senderId:
-          maxLength: 100
-          minLength: 2
-          type: string
-          description: Sender Id configured for the TP
-          example: CMSFFM
-        receiverId:
-          maxLength: 100
-          minLength: 2
-          type: string
-          description: Receiver Id configured for the TP
-          example: "96633"
-        lineOfBusinessTypeCode:
-          maxLength: 100
-          minLength: 2
-          type: string
-          description: LOB associated with the trading partner
-          example: HIX
-        marketplaceTypeCode:
-          maxLength: 10
-          minLength: 2
-          type: string
-          description: Marketplace Type Code of the trading partner
-          example: FFM
-        stateTypeCode:
-          maxLength: 2
-          minLength: 2
-          type: string
-          description: State of the trading partner
-          example: FL
-      description: Trading Partner Object
     TradingPartnerList:
       type: object
       properties:

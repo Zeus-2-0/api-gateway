@@ -1,9 +1,7 @@
 package com.brihaspathee.zeus.web.resource.interfaces;
 
 import com.brihaspathee.zeus.permissions.AccountReadPermission;
-import com.brihaspathee.zeus.web.model.AccountDto;
 import com.brihaspathee.zeus.web.model.AccountList;
-import com.brihaspathee.zeus.web.model.WelcomeDto;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,12 +11,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,4 +77,29 @@ public interface AccountAPI {
     @GetMapping("/search")
     @AccountReadPermission
     ResponseEntity<ZeusApiResponse<AccountList>> getAccountByParameters(@RequestParam Map<String, String> searchParams);
+
+    /**
+     * Get account information by account number
+     * @param accountNumber
+     * @return
+     */
+    @Operation(
+            method = "GET",
+            description = "Get account by account number",
+            tags = {"accounts"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved the account by account number",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ZeusApiResponse.class))
+                            }
+                    )
+            }
+    )
+    @GetMapping("/{accountNumber}")
+    @AccountReadPermission
+    ResponseEntity<ZeusApiResponse<AccountList>> getAccountByAccountNumber(@PathVariable String accountNumber);
 }

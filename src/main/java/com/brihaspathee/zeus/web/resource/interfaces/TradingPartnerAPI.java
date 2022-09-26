@@ -1,9 +1,7 @@
 package com.brihaspathee.zeus.web.resource.interfaces;
 
-import com.brihaspathee.zeus.permissions.AccountReadPermission;
 import com.brihaspathee.zeus.permissions.TradingPartnerCreatePermission;
 import com.brihaspathee.zeus.permissions.TradingPartnerReadPermission;
-import com.brihaspathee.zeus.web.model.AccountDto;
 import com.brihaspathee.zeus.web.model.TradingPartnerDto;
 import com.brihaspathee.zeus.web.model.TradingPartnerList;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
@@ -18,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**

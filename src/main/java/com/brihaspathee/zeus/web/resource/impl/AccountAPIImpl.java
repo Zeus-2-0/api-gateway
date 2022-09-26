@@ -1,7 +1,7 @@
 package com.brihaspathee.zeus.web.resource.impl;
 
+import com.brihaspathee.zeus.constants.ApiResponseConstants;
 import com.brihaspathee.zeus.service.interfaces.AccountService;
-import com.brihaspathee.zeus.web.model.AccountDto;
 import com.brihaspathee.zeus.web.model.AccountList;
 import com.brihaspathee.zeus.web.resource.interfaces.AccountAPI;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
@@ -11,8 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created in Intellij IDEA
@@ -28,13 +29,18 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AccountAPIImpl implements AccountAPI {
 
+    /**
+     * The account service method to get the account related details
+     */
     private final AccountService accountService;
 
+    /**
+     * Get all the accounts
+     * @return
+     */
     @Override
     public ResponseEntity<ZeusApiResponse<AccountList>> getAllAccounts() {
-        AccountList accountList = AccountList.builder()
-                .accountDtos(accountService.getAllAccounts())
-                .build();
+        AccountList accountList = accountService.getAllAccounts();
         ZeusApiResponse<AccountList> apiResponse = ZeusApiResponse.<AccountList>builder()
                 .response(accountList)
                 .statusCode(HttpStatus.OK.value())
@@ -44,6 +50,11 @@ public class AccountAPIImpl implements AccountAPI {
         return ResponseEntity.ok(apiResponse);
     }
 
+    /**
+     * Get the account by search parameters
+     * @param searchParams
+     * @return
+     */
     @Override
     public ResponseEntity<ZeusApiResponse<AccountList>> getAccountByParameters(Map<String, String> searchParams) {
         log.info("Query Parameters:{}", searchParams);
@@ -51,6 +62,25 @@ public class AccountAPIImpl implements AccountAPI {
                 .response(accountService.getAccountsByParams(searchParams))
                 .message("API Success")
                 .status(HttpStatus.OK)
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    /**
+     * Get account by account number
+     * @param accountNumber
+     * @return
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<AccountList>> getAccountByAccountNumber(String accountNumber) {
+        ZeusApiResponse<AccountList> apiResponse = ZeusApiResponse.<AccountList>builder()
+                .response(accountService.getAccountByAccountNumber(accountNumber))
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(200)
+                .message(ApiResponseConstants.SUCCESS)
+                .developerMessage(ApiResponseConstants.SUCCESS_REASON)
+                .reason(ApiResponseConstants.SUCCESS_REASON)
                 .build();
         return ResponseEntity.ok(apiResponse);
     }
