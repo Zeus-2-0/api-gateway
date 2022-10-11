@@ -2,6 +2,7 @@ package com.brihaspathee.zeus.web.resource.interfaces;
 
 import com.brihaspathee.zeus.permissions.AccountReadPermission;
 import com.brihaspathee.zeus.web.model.AccountList;
+import com.brihaspathee.zeus.web.model.MemberDto;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -102,4 +103,29 @@ public interface AccountAPI {
     @GetMapping("/{accountNumber}")
     @AccountReadPermission
     ResponseEntity<ZeusApiResponse<AccountList>> getAccountByAccountNumber(@PathVariable String accountNumber);
+
+    /**
+     * Get member by member code
+     * @param memberCode
+     * @return
+     */
+    @Operation(
+            method = "GET",
+            description = "Get member by member code",
+            tags = {"accounts"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved the member by member code",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ZeusApiResponse.class))
+                            }
+                    )
+            }
+    )
+    @GetMapping("/member/{memberCode}")
+    @AccountReadPermission
+    ResponseEntity<ZeusApiResponse<MemberDto>> getMemberByMemberCode(@PathVariable String memberCode);
 }
