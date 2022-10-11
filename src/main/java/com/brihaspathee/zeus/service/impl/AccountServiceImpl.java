@@ -1,9 +1,9 @@
 package com.brihaspathee.zeus.service.impl;
 
-import com.brihaspathee.zeus.reference.data.model.InternalListTypeDto;
 import com.brihaspathee.zeus.service.interfaces.AccountService;
 import com.brihaspathee.zeus.web.model.AccountDto;
 import com.brihaspathee.zeus.web.model.AccountList;
+import com.brihaspathee.zeus.web.model.MemberDto;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -80,6 +78,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public AccountList getAccountByAccountNumber(String accountNumber) {
+        log.info("Account Number of the account:{}",accountNumber);
         ZeusApiResponse<AccountDto> apiResponse = webClient.get()
                 .uri(memberMgmtHost+"zeus/account/"+accountNumber)
                 .retrieve()
@@ -89,5 +88,21 @@ public class AccountServiceImpl implements AccountService {
                 .accountDtos(Set.of(apiResponse.getResponse()))
                 .build();
         return accountList;
+    }
+
+    /**
+     * Get member by member code
+     * @param memberCode
+     * @return
+     */
+    @Override
+    public MemberDto getMemberByMemberCode(String memberCode) {
+        log.info("Member code of the member:{}", memberCode);
+        ZeusApiResponse<MemberDto> apiResponse = webClient.get()
+                .uri(memberMgmtHost+"zeus/member/"+memberCode)
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<ZeusApiResponse<MemberDto>>() {})
+                .block();
+        return apiResponse.getResponse();
     }
 }

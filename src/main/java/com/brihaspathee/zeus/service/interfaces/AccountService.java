@@ -1,9 +1,8 @@
 package com.brihaspathee.zeus.service.interfaces;
 
-import com.brihaspathee.zeus.web.model.AccountDto;
 import com.brihaspathee.zeus.web.model.AccountList;
+import com.brihaspathee.zeus.web.model.MemberDto;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,4 +35,11 @@ public interface AccountService {
      * @return
      */
     AccountList getAccountByAccountNumber(String accountNumber);
+
+    /**
+     * Get member by member code
+     * @param memberCode
+     * @return
+     */
+    MemberDto getMemberByMemberCode(String memberCode);
 }

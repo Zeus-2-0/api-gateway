@@ -3,6 +3,7 @@ package com.brihaspathee.zeus.web.resource.impl;
 import com.brihaspathee.zeus.constants.ApiResponseConstants;
 import com.brihaspathee.zeus.service.interfaces.AccountService;
 import com.brihaspathee.zeus.web.model.AccountList;
+import com.brihaspathee.zeus.web.model.MemberDto;
 import com.brihaspathee.zeus.web.resource.interfaces.AccountAPI;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created in Intellij IDEA
@@ -75,6 +75,26 @@ public class AccountAPIImpl implements AccountAPI {
     public ResponseEntity<ZeusApiResponse<AccountList>> getAccountByAccountNumber(String accountNumber) {
         ZeusApiResponse<AccountList> apiResponse = ZeusApiResponse.<AccountList>builder()
                 .response(accountService.getAccountByAccountNumber(accountNumber))
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(200)
+                .message(ApiResponseConstants.SUCCESS)
+                .developerMessage(ApiResponseConstants.SUCCESS_REASON)
+                .reason(ApiResponseConstants.SUCCESS_REASON)
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    /**
+     * Get member by member code
+     * @param memberCode
+     * @return
+     */
+    @Override
+    public ResponseEntity<ZeusApiResponse<MemberDto>> getMemberByMemberCode(String memberCode) {
+        log.info("The member code:{}", memberCode);
+        ZeusApiResponse<MemberDto> apiResponse = ZeusApiResponse.<MemberDto>builder()
+                .response(accountService.getMemberByMemberCode(memberCode))
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(200)
