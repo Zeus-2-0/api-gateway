@@ -1,7 +1,8 @@
 package com.brihaspathee.zeus.service.interfaces;
 
-import com.brihaspathee.zeus.web.model.AccountList;
-import com.brihaspathee.zeus.web.model.MemberDto;
+
+import com.brihaspathee.zeus.dto.account.AccountList;
+import com.brihaspathee.zeus.dto.account.MemberDto;
 
 import java.util.Map;
 

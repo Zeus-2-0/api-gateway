@@ -1,9 +1,9 @@
 package com.brihaspathee.zeus.service.impl;
 
+import com.brihaspathee.zeus.dto.account.AccountDto;
+import com.brihaspathee.zeus.dto.account.AccountList;
+import com.brihaspathee.zeus.dto.account.MemberDto;
 import com.brihaspathee.zeus.service.interfaces.AccountService;
-import com.brihaspathee.zeus.web.model.AccountDto;
-import com.brihaspathee.zeus.web.model.AccountList;
-import com.brihaspathee.zeus.web.model.MemberDto;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
