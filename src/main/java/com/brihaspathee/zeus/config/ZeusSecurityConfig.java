@@ -6,13 +6,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -26,9 +29,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @RequiredArgsConstructor
-public class ZeusSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ZeusSecurityConfig {
     private static final String[] AUTH_WHITELIST = {
             "/swagger-resources/**",
 
@@ -44,31 +47,34 @@ public class ZeusSecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private final ZeusRequestFilter zeusRequestFilter;
+    private final AuthenticationProvider authenticationProvider;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    @Override
-    @Bean
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
-    }
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests(
+
+    @Bean
+    protected SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeHttpRequests(
                         authorize -> {
                             authorize.
-                                    antMatchers(AUTH_WHITELIST).permitAll();
-                            authorize.antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+                                    requestMatchers(AUTH_WHITELIST).permitAll();
+                            authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                         }
-                ).authorizeRequests().anyRequest().authenticated()
+                ).authorizeHttpRequests().anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().httpBasic()
-                .and().csrf().disable();
+                .and().csrf().disable().authenticationProvider(authenticationProvider);
         httpSecurity.headers().frameOptions().sameOrigin();
         httpSecurity.addFilterBefore(zeusRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        return httpSecurity.build();
+    }
+
+    @Bean
+    protected AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }

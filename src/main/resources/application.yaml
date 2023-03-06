@@ -29,6 +29,7 @@ spring:
   flyway:
     user: apigatewayadmin
     password: password
+    clean-disabled: false
 logging:
   file:
     name: logs/local/tp.log

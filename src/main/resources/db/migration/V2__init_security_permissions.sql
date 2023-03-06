@@ -154,9 +154,9 @@ INSERT INTO apigatewaydb.role_authority(role_id, authority_id) VALUES ('69c07827
 
 -- Users
 
-INSERT INTO apigatewaydb.security_user(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled, created_date, updated_date) VALUES ('3375d2ab-5b0f-4da2-a26b-abf7354086f4', 'john', '{bcrypt}$2a$10$q15whOtuMFuQIWqRNzzLzezI7.DURBkOL773py64tMdf6DN.x8IgG', true, true, true, true, sysdate(), sysdate());
-INSERT INTO apigatewaydb.security_user(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled, created_date, updated_date) VALUES ('ac5f043b-67b0-4878-8819-5d47ed8dad29', 'mary', '{bcrypt}$2a$10$vTh8UGPShOV1CTungBEC4.vC16cyxyxIXcmGAg4xqDGuyQAbkSiby', true, true, true, true, sysdate(), sysdate());
-INSERT INTO apigatewaydb.security_user(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled,created_date, updated_date) VALUES ('cabcab65-a744-4e09-a727-ba686d20127c', 'cindy', '{bcrypt}$2a$10$pF7dup.ytKQNRksptR2ehessjqG7e3jp8eiuzyT1dOzUtKIUCkDiq', true, true, true, true, sysdate(), sysdate());
+INSERT INTO apigatewaydb.security_user(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled, created_date, updated_date) VALUES ('3375d2ab-5b0f-4da2-a26b-abf7354086f4', 'john', '$2a$10$q15whOtuMFuQIWqRNzzLzezI7.DURBkOL773py64tMdf6DN.x8IgG', true, true, true, true, sysdate(), sysdate());
+INSERT INTO apigatewaydb.security_user(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled, created_date, updated_date) VALUES ('ac5f043b-67b0-4878-8819-5d47ed8dad29', 'mary', '$2a$10$vTh8UGPShOV1CTungBEC4.vC16cyxyxIXcmGAg4xqDGuyQAbkSiby', true, true, true, true, sysdate(), sysdate());
+INSERT INTO apigatewaydb.security_user(user_id, username, password, account_not_expired, account_not_locked, credentials_not_expired, enabled,created_date, updated_date) VALUES ('cabcab65-a744-4e09-a727-ba686d20127c', 'cindy', '$2a$10$pF7dup.ytKQNRksptR2ehessjqG7e3jp8eiuzyT1dOzUtKIUCkDiq', true, true, true, true, sysdate(), sysdate());
 
 -- User Role Relationship
 
