@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.brihaspathee.zeus</groupId>
     <artifactId>api-gateway</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>API Gateway</name>
     <description>API Gateway</description>
     <properties>
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>com.brihaspathee.zeus</groupId>
             <artifactId>zeus-library</artifactId>
-            <version>1.0.80</version>
+            <version>1.0.84</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

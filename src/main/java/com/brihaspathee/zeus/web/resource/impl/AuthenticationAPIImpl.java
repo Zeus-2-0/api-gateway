@@ -10,6 +10,7 @@ import com.brihaspathee.zeus.web.model.AuthenticationResponse;
 import com.brihaspathee.zeus.web.resource.interfaces.AuthenticationAPI;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +30,7 @@ import java.time.LocalDateTime;
  * Package Name: com.brihaspathee.zeus.web.resource.impl
  * To change this template use File | Settings | File and Code Template
  */
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class AuthenticationAPIImpl implements AuthenticationAPI {
@@ -51,13 +53,15 @@ public class AuthenticationAPIImpl implements AuthenticationAPI {
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
                             authenticationRequest.getPassword()));
         }catch (BadCredentialsException e){
-            throw new Exception("Incorrect username or password");
+//            throw new Exception("Incorrect username or password");
+            throw new BadCredentialsException("Incorrect password provided for the user: " + authenticationRequest.getUsername());
         }
 
 //        final User userDetails = zeusUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 //        final String jwt = zeusJwtUtil.generateToken(userDetails);
 //        return AuthenticationResponse.builder().jwtToken(jwt).build();
         AuthenticationResponse authenticationResponse = apiGatewayUserService.getAuthenticationResponse(authenticationRequest.getUsername());
+        log.info("Authentication Response: {}", authenticationResponse);
         return getAuthenticatedResponse(authenticationResponse);
     }
 
