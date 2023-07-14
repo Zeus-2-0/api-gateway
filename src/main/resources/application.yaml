@@ -32,7 +32,7 @@ spring:
     clean-disabled: false
 logging:
   file:
-    name: logs/local/tp.log
+    name: logs/local/api-gateway.log
   level:
     org:
       hibernate:

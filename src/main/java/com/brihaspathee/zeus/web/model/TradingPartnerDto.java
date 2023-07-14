@@ -73,6 +73,13 @@ public class TradingPartnerDto {
     private String lineOfBusinessTypeCode;
 
     @JsonProperty(required = true)
+    @Schema(description = "Business Unit associated with the trading partner", example = "HIX")
+    //@NotNull
+    //@NotBlank
+    @Size(min = 2, max = 100)
+    private String businessUnitTypeCode;
+
+    @JsonProperty(required = true)
     @Schema(description = "Marketplace Type Code of the trading partner", example = "FFM")
     //@NotNull
     //@NotBlank
@@ -96,6 +103,7 @@ public class TradingPartnerDto {
                 ", senderId='" + senderId + '\'' +
                 ", receiverId='" + receiverId + '\'' +
                 ", lineOfBusinessTypeCode='" + lineOfBusinessTypeCode + '\'' +
+                ", businessUnitTypeCode='" + businessUnitTypeCode + '\'' +
                 ", marketplaceTypeCode='" + marketplaceTypeCode + '\'' +
                 ", stateTypeCode='" + stateTypeCode + '\'' +
                 '}';

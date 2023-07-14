@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/balaji/Documents/mac-mini/Projects.nosync/Zeus/api-gateway/src/main/java/com/brihaspathee/zeus/auth</OriginalElement>
+  <nodes>
+    <node x="-132.0" y="-152.0">com.brihaspathee.zeus.auth.ZeusUserDetailsService</node>
+    <node x="-224.0" y="16.0">com.brihaspathee.zeus.auth.filter.ZeusRequestFilter</node>
+    <node x="-176.0" y="212.0">com.brihaspathee.zeus.auth.util.ZeusJwtUtil</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Compact" zoom="1.0" showDependencies="false" x="0.0" y="182.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
