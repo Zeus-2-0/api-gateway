@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.*;
  * To change this template use File | Settings | File and Code Template
  */
 @RequestMapping("/zeus")
-//@CrossOrigin(origins = "http://localhost:7200")
+// @CrossOrigin(origins = "http://zeus-ui:80")
 @Validated
 public interface AuthenticationAPI {
 

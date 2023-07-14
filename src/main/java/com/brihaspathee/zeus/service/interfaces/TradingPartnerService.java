@@ -4,6 +4,8 @@ import com.brihaspathee.zeus.web.model.TradingPartnerDto;
 import com.brihaspathee.zeus.web.model.TradingPartnerList;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.util.UUID;
+
 /**
  * Created in Intellij IDEA
  * User: Balaji Varadharajan
@@ -35,4 +37,11 @@ public interface TradingPartnerService {
      * @throws JsonProcessingException
      */
     TradingPartnerDto createTradingPartner(TradingPartnerDto tradingPartnerDto) throws JsonProcessingException;
+
+    /**
+     * Update an existing trading partner
+     * @param tradingPartnerDto - The dto of the trading partner to be updated
+     * @param tradingPartnerSK - The primary key of the trading partner
+     */
+    void updateTradingPartner(TradingPartnerDto tradingPartnerDto, UUID tradingPartnerSK) throws JsonProcessingException;
 }

@@ -15,11 +15,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * To change this template use File | Settings | File and Code Template
  */
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 public class CORSConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
+
+//        registry.addMapping("/**").allowedMethods("*").allowedOrigins("http://localhost:9090");
+        registry.addMapping("/**").allowedMethods("*");
     }
 }

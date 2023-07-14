@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.UUID;
+
 /**
  * Created in Intellij IDEA
  * User: Balaji Varadharajan
@@ -107,7 +109,7 @@ public class TradingPartnerServiceImpl implements TradingPartnerService {
         String tradingPartnerAsString = objectMapper.writeValueAsString(tradingPartnerDto);
         HttpEntity<String> httpEntity = new HttpEntity<>(tradingPartnerAsString, headers);
         RestTemplate tpRestTemplate = restTemplateBuilder.basicAuthentication("api-gateway", "password").build();
-        ResponseEntity<ZeusApiResponse> apiResponse = tpRestTemplate.postForEntity(tradingPartnerHost+"tp/", httpEntity, ZeusApiResponse.class);
+        ResponseEntity<ZeusApiResponse> apiResponse = tpRestTemplate.postForEntity(tradingPartnerHost+"tp", httpEntity, ZeusApiResponse.class);
         if (apiResponse.getBody().getMessage().equals("Success")){
             TradingPartnerDto savedTradingPartner = objectMapper.convertValue(apiResponse.getBody().getResponse(), TradingPartnerDto.class);
             log.info("Trading Partner Response:{}", savedTradingPartner);
@@ -115,5 +117,16 @@ public class TradingPartnerServiceImpl implements TradingPartnerService {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public void updateTradingPartner(TradingPartnerDto tradingPartnerDto, UUID tradingPartnerSK) throws JsonProcessingException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        log.info("Trading partner host:{}", tradingPartnerHost);
+        String tradingPartnerAsString = objectMapper.writeValueAsString(tradingPartnerDto);
+        HttpEntity<String> httpEntity = new HttpEntity<>(tradingPartnerAsString, headers);
+        RestTemplate tpRestTemplate = restTemplateBuilder.basicAuthentication("api-gateway", "password").build();
+        tpRestTemplate.put(tradingPartnerHost+"tp/"+tradingPartnerSK.toString(), httpEntity, ZeusApiResponse.class);
     }
 }

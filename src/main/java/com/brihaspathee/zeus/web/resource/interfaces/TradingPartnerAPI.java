@@ -2,6 +2,7 @@ package com.brihaspathee.zeus.web.resource.interfaces;
 
 import com.brihaspathee.zeus.permissions.TradingPartnerCreatePermission;
 import com.brihaspathee.zeus.permissions.TradingPartnerReadPermission;
+import com.brihaspathee.zeus.permissions.TradingPartnerUpdatePermission;
 import com.brihaspathee.zeus.web.model.TradingPartnerDto;
 import com.brihaspathee.zeus.web.model.TradingPartnerList;
 import com.brihaspathee.zeus.web.response.ZeusApiResponse;
@@ -11,12 +12,14 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created in Intellij IDEA
@@ -28,7 +31,7 @@ import java.util.Map;
  * To change this template use File | Settings | File and Code Template
  */
 @RequestMapping("/api/v1/zeus/tp")
-//@CrossOrigin(origins = "http://localhost:7200")
+//@CrossOrigin(origins = "http://localhost:9090")
 @Validated
 public interface TradingPartnerAPI {
 
@@ -137,4 +140,26 @@ public interface TradingPartnerAPI {
     @TradingPartnerCreatePermission
     @PostMapping
     ResponseEntity<ZeusApiResponse<TradingPartnerDto>> createTradingPartner(@RequestBody TradingPartnerDto tradingPartnerDto) throws JsonProcessingException;
+
+    /**
+     * Update Trading Partner
+     * @param tradingPartnerDto
+     * @param tradingPartnerSK
+     * @return
+     */
+    @Operation(
+            method = "PUT",
+            description = "Update a new trading partner",
+            tags = {"trading-partner"}
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Successfully updated the trading partner",
+                    content = {
+                            @Content(mediaType = "application/json",schema = @Schema(implementation = TradingPartnerDto.class))
+                    })
+    })
+    @TradingPartnerUpdatePermission
+    @PutMapping("/{tradingPartnerSK}")
+    ResponseEntity updateTradingPartner(@RequestBody TradingPartnerDto tradingPartnerDto, @PathVariable("tradingPartnerSK") UUID tradingPartnerSK) throws JsonProcessingException;
 }

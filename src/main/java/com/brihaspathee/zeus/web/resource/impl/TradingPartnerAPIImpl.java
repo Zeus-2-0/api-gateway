@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created in Intellij IDEA
@@ -80,6 +81,7 @@ public class TradingPartnerAPIImpl implements TradingPartnerAPI {
      */
     @Override
     public ResponseEntity<ZeusApiResponse<TradingPartnerDto>> createTradingPartner(TradingPartnerDto tradingPartnerDto) throws JsonProcessingException {
+        log.info("Trading partner details:{}", tradingPartnerDto);
         TradingPartnerDto savedTradingPartner = tradingPartnerService.createTradingPartner(tradingPartnerDto);
         ZeusApiResponse<TradingPartnerDto> apiResponse = ZeusApiResponse.<TradingPartnerDto>builder()
                 .response(savedTradingPartner)
@@ -89,5 +91,18 @@ public class TradingPartnerAPIImpl implements TradingPartnerAPI {
                 .message("Successfully Created the trading partner")
                 .build();
         return new ResponseEntity<ZeusApiResponse<TradingPartnerDto>>(apiResponse, HttpStatus.CREATED);
+    }
+
+    /**
+     * Update an existing Trading Partner
+     * @param tradingPartnerDto
+     * @param tradingPartnerSK
+     * @return
+     */
+    @Override
+    public ResponseEntity updateTradingPartner(TradingPartnerDto tradingPartnerDto,
+                                                                                   UUID tradingPartnerSK) throws JsonProcessingException {
+        tradingPartnerService.updateTradingPartner(tradingPartnerDto, tradingPartnerSK);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

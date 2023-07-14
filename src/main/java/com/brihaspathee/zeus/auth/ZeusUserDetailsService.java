@@ -29,9 +29,11 @@ public class ZeusUserDetailsService implements UserDetailsService {
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("Getting Details from DB using JPA");
-        return userRepository.findUserByUsername(username).orElseThrow( () -> {
+        User user = userRepository.findUserByUsername(username).orElseThrow( () -> {
             log.info("Inside the exception for user not found");
             return new UserNotFoundException("User with username " + username + " not found");
         }) ;
+        log.info("user logged in is:{}", user.getUsername());
+        return user;
     }
 }
