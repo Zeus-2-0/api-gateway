@@ -65,14 +65,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
-        "400":
-          description: Bad Request
+        "409":
+          description: Conflict
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
-        "409":
-          description: Conflict
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -97,6 +97,12 @@ paths:
               $ref: '#/components/schemas/RoleDto'
         required: true
       responses:
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
         "204":
           description: Successfully update the role
           content:
@@ -105,12 +111,6 @@ paths:
                 $ref: '#/components/schemas/ZeusApiResponseRoleDto'
         "400":
           description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
-        "409":
-          description: Conflict
           content:
             application/json:
               schema:
@@ -135,14 +135,14 @@ paths:
               $ref: '#/components/schemas/AuthorityDto'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "409":
+          description: Conflict
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
-        "409":
-          description: Conflict
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -166,14 +166,14 @@ paths:
               $ref: '#/components/schemas/AuthenticationRequest'
         required: true
       responses:
-        "201":
-          description: Successfully created the trading partner
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationResponse'
-        "400":
-          description: Bad Request
+        "201":
+          description: Successfully created the trading partner
           content:
             application/json:
               schema:
@@ -240,6 +240,12 @@ paths:
               $ref: '#/components/schemas/UserDto'
         required: true
       responses:
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
         "400":
           description: Bad Request
           content:
@@ -252,12 +258,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
-        "409":
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
   /api/v1/zeus/security/role:
     get:
       tags:
@@ -283,12 +283,6 @@ paths:
               $ref: '#/components/schemas/RoleDto'
         required: true
       responses:
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
         "409":
           description: Conflict
           content:
@@ -301,6 +295,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RoleDto'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
   /api/v1/zeus/security/authority:
     get:
       tags:
@@ -326,12 +326,6 @@ paths:
               $ref: '#/components/schemas/AuthorityDto'
         required: true
       responses:
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
         "409":
           description: Conflict
           content:
@@ -344,6 +338,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthorityDto'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
   /api/v1/zeus/ref-data/internal/list-types:
     get:
       tags:
@@ -432,14 +432,14 @@ paths:
         schema:
           type: string
       responses:
-        "404":
-          description: Not Found
+        "200":
+          description: Successfully retrieved the trading partner
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TradingPartnerDto'
-        "200":
-          description: Successfully retrieved the trading partner
+        "404":
+          description: Not Found
           content:
             application/json:
               schema:
@@ -810,6 +810,7 @@ components:
           - 100 CONTINUE
           - 101 SWITCHING_PROTOCOLS
           - 102 PROCESSING
+          - 103 EARLY_HINTS
           - 103 CHECKPOINT
           - 200 OK
           - 201 CREATED
@@ -898,6 +899,7 @@ components:
           - 100 CONTINUE
           - 101 SWITCHING_PROTOCOLS
           - 102 PROCESSING
+          - 103 EARLY_HINTS
           - 103 CHECKPOINT
           - 200 OK
           - 201 CREATED
@@ -1062,6 +1064,7 @@ components:
           - 100 CONTINUE
           - 101 SWITCHING_PROTOCOLS
           - 102 PROCESSING
+          - 103 EARLY_HINTS
           - 103 CHECKPOINT
           - 200 OK
           - 201 CREATED
@@ -1162,6 +1165,7 @@ components:
           - 100 CONTINUE
           - 101 SWITCHING_PROTOCOLS
           - 102 PROCESSING
+          - 103 EARLY_HINTS
           - 103 CHECKPOINT
           - 200 OK
           - 201 CREATED
