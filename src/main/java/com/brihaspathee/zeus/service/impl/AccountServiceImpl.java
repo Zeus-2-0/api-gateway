@@ -79,15 +79,13 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountList getAccountByAccountNumber(String accountNumber) {
         log.info("Account Number of the account:{}",accountNumber);
-        ZeusApiResponse<AccountDto> apiResponse = webClient.get()
+        ZeusApiResponse<AccountList> apiResponse = webClient.get()
                 .uri(memberMgmtHost+"zeus/account/"+accountNumber)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<ZeusApiResponse<AccountDto>>() {})
+                .bodyToMono(new ParameterizedTypeReference<ZeusApiResponse<AccountList>>() {})
                 .block();
-        AccountList accountList = AccountList.builder()
-                .accountDtos(Set.of(apiResponse.getResponse()))
-                .build();
-        return accountList;
+        log.info("Account returned:{}", apiResponse.getResponse());
+        return apiResponse.getResponse();
     }
 
     /**
