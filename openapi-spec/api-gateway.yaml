@@ -59,12 +59,6 @@ paths:
               $ref: '#/components/schemas/UserDto'
         required: true
       responses:
-        "201":
-          description: Successfully updated the user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
         "409":
           description: Conflict
           content:
@@ -77,6 +71,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
+        "201":
+          description: Successfully updated the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
   /api/v1/zeus/security/role/{roleId}:
     put:
       tags:
@@ -97,18 +97,18 @@ paths:
               $ref: '#/components/schemas/RoleDto'
         required: true
       responses:
-        "409":
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
         "204":
           description: Successfully update the role
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ZeusApiResponseRoleDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
         "400":
           description: Bad Request
           content:
@@ -432,14 +432,14 @@ paths:
         schema:
           type: string
       responses:
-        "200":
-          description: Successfully retrieved the trading partner
+        "404":
+          description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TradingPartnerDto'
-        "404":
-          description: Not Found
+        "200":
+          description: Successfully retrieved the trading partner
           content:
             application/json:
               schema:
