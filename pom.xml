@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.brihaspathee.zeus</groupId>
     <artifactId>api-gateway</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
     <name>API Gateway</name>
     <description>API Gateway</description>
     <properties>
@@ -30,7 +30,7 @@
         <!--        <developerConnection>scm:git:ssh://github.com:Zeus-2-0/reference-data-service.git</developerConnection>-->
         <developerConnection>scm:git:git@github.com:Zeus-2-0/api-gateway.git</developerConnection>
         <url>scm:git:http://github.com/Zeus-2-0/api-gateway</url>
-        <tag>api-gateway-1.0.3</tag>
+        <tag>api-gateway-0.0.1</tag>
     </scm>
 
     <developers>
