@@ -59,24 +59,24 @@ paths:
               $ref: '#/components/schemas/UserDto'
         required: true
       responses:
-        "201":
-          description: Successfully updated the user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
         "409":
           description: Conflict
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "201":
+          description: Successfully updated the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
   /api/v1/zeus/security/role/{roleId}:
     put:
       tags:
@@ -97,24 +97,24 @@ paths:
               $ref: '#/components/schemas/RoleDto'
         required: true
       responses:
-        "204":
-          description: Successfully update the role
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ZeusApiResponseRoleDto'
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
         "409":
           description: Conflict
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "204":
+          description: Successfully update the role
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ZeusApiResponseRoleDto'
   /api/v1/zeus/security/authority/{authorityId}:
     put:
       tags:
@@ -135,14 +135,14 @@ paths:
               $ref: '#/components/schemas/AuthorityDto'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "409":
+          description: Conflict
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
-        "409":
-          description: Conflict
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -166,8 +166,8 @@ paths:
               $ref: '#/components/schemas/AuthenticationRequest'
         required: true
       responses:
-        "409":
-          description: Conflict
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -178,8 +178,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationResponse'
-        "400":
-          description: Bad Request
+        "409":
+          description: Conflict
           content:
             application/json:
               schema:
@@ -240,24 +240,24 @@ paths:
               $ref: '#/components/schemas/UserDto'
         required: true
       responses:
-        "201":
-          description: Successfully created the user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
         "409":
           description: Conflict
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "201":
+          description: Successfully created the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
   /api/v1/zeus/security/role:
     get:
       tags:
@@ -283,14 +283,14 @@ paths:
               $ref: '#/components/schemas/RoleDto'
         required: true
       responses:
-        "400":
-          description: Bad Request
+        "409":
+          description: Conflict
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
-        "409":
-          description: Conflict
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -326,24 +326,24 @@ paths:
               $ref: '#/components/schemas/AuthorityDto'
         required: true
       responses:
-        "201":
-          description: Successfully created the authority
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthorityDto'
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiExceptionList'
         "409":
           description: Conflict
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiExceptionList'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "201":
+          description: Successfully created the authority
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorityDto'
   /api/v1/zeus/ref-data/internal/list-types:
     get:
       tags:
@@ -432,14 +432,14 @@ paths:
         schema:
           type: string
       responses:
-        "404":
-          description: Not Found
+        "200":
+          description: Successfully retrieved the trading partner
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TradingPartnerDto'
-        "200":
-          description: Successfully retrieved the trading partner
+        "404":
+          description: Not Found
           content:
             application/json:
               schema:
