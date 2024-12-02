@@ -7,11 +7,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,6 +46,7 @@ public class ZeusSecurityConfig {
             "/h2-console/**",
             "/host",
             "/zeus/jwt/authenticate",
+            "/api/v1/zeus/welcome",
             "/swagger-ui.html",
             "/v3/api-docs.yaml"
             // other public endpoints of your API may be appended to this array
@@ -58,17 +64,35 @@ public class ZeusSecurityConfig {
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+//        httpSecurity.authorizeHttpRequests(
+//                        authorize -> {
+//                            authorize.
+//                                    requestMatchers(AUTH_WHITELIST).permitAll();
+//                            authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+//                        }
+//                ).authorizeHttpRequests().anyRequest().authenticated()
+//                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and().httpBasic()
+//                .and().csrf().disable().authenticationProvider(authenticationProvider);
+
         httpSecurity.authorizeHttpRequests(
                         authorize -> {
-                            authorize.
-                                    requestMatchers(AUTH_WHITELIST).permitAll();
-                            authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
-                        }
-                ).authorizeHttpRequests().anyRequest().authenticated()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().httpBasic()
-                .and().csrf().disable().authenticationProvider(authenticationProvider);
-        httpSecurity.headers().frameOptions().sameOrigin();
+                            authorize
+                                    .requestMatchers(AUTH_WHITELIST).permitAll()
+                                    .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                    .anyRequest().authenticated();
+                        })
+                .csrf(AbstractHttpConfigurer::disable)
+                .authenticationProvider(authenticationProvider)
+                .sessionManagement(httpSecuritySessionManagementConfigurer ->
+                        httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                        .httpBasic(Customizer.withDefaults());
+
+
+
+//        httpSecurity.headers().frameOptions().sameOrigin();
+        httpSecurity.headers(headers ->
+                headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
         httpSecurity.addFilterBefore(zeusRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
