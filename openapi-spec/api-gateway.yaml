@@ -59,12 +59,6 @@ paths:
               $ref: "#/components/schemas/UserDto"
         required: true
       responses:
-        "409":
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiExceptionList"
         "400":
           description: Bad Request
           content:
@@ -77,6 +71,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserDto"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiExceptionList"
   /api/v1/zeus/security/role/{roleId}:
     put:
       tags:
@@ -103,14 +103,14 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ZeusApiResponseRoleDto"
-        "409":
-          description: Conflict
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiExceptionList"
-        "400":
-          description: Bad Request
+        "409":
+          description: Conflict
           content:
             application/json:
               schema:
@@ -135,14 +135,14 @@ paths:
               $ref: "#/components/schemas/AuthorityDto"
         required: true
       responses:
-        "409":
-          description: Conflict
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiExceptionList"
-        "400":
-          description: Bad Request
+        "409":
+          description: Conflict
           content:
             application/json:
               schema:
@@ -172,14 +172,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthenticationResponse"
-        "400":
-          description: Bad Request
+        "409":
+          description: Conflict
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthenticationResponse"
-        "409":
-          description: Conflict
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -240,8 +240,8 @@ paths:
               $ref: "#/components/schemas/UserDto"
         required: true
       responses:
-        "409":
-          description: Conflict
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -252,8 +252,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserDto"
-        "400":
-          description: Bad Request
+        "409":
+          description: Conflict
           content:
             application/json:
               schema:
@@ -283,12 +283,6 @@ paths:
               $ref: "#/components/schemas/RoleDto"
         required: true
       responses:
-        "409":
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiExceptionList"
         "400":
           description: Bad Request
           content:
@@ -301,6 +295,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RoleDto"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiExceptionList"
   /api/v1/zeus/security/authority:
     get:
       tags:
@@ -326,6 +326,12 @@ paths:
               $ref: "#/components/schemas/AuthorityDto"
         required: true
       responses:
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiExceptionList"
         "201":
           description: Successfully created the authority
           content:
@@ -334,12 +340,6 @@ paths:
                 $ref: "#/components/schemas/AuthorityDto"
         "409":
           description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiExceptionList"
-        "400":
-          description: Bad Request
           content:
             application/json:
               schema:
@@ -432,14 +432,14 @@ paths:
         schema:
           type: string
       responses:
-        "404":
-          description: Not Found
+        "200":
+          description: Successfully retrieved the trading partner
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/TradingPartnerDto"
-        "200":
-          description: Successfully retrieved the trading partner
+        "404":
+          description: Not Found
           content:
             application/json:
               schema:
