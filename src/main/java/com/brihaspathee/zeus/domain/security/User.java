@@ -37,6 +37,13 @@ import java.util.stream.Collectors;
 @Table(name = "SECURITY_USER")
 public class User implements UserDetails, CredentialsContainer {
 
+    /**
+     * Represents the unique identifier for a user.
+     *
+     * This field is a primary key, automatically generated using a UUID generator.
+     * It is stored as a VARCHAR column in the database with a fixed length of 36 characters.
+     * The identifier is immutable and cannot be updated once created.
+     */
     @Id
     @GeneratedValue(generator = "UUID")
     @JdbcTypeCode(Types.LONGVARCHAR)
